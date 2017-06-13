@@ -1,0 +1,90 @@
+<form method="get" action="index.html" class="input-group search-query " style="width: 380px; float:left;margin: 10px;">
+    <select name="db_name" class="form-control" style="color: #2a6496" >
+        <option value="">请选择</option>
+        <!--{foreach $db_names as $name}-->
+        <option value="<!--{$name}-->" <!--{if isset($tables)}--><!--{if $name == $db|default:0}-->selected="selected"
+        <!--{/if}--><!--{/if}-->> <!--{$name}--></option>
+        <!--{/foreach}-->
+    </select>
+    <span class="input-group-btn">
+                                <button class="btn" type="submit" data-original-title="search Table" ><i class="fa fa-search"></i></button>
+                         </span>
+</form>
+<!--{if isset($tables)}-->
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i>数据库<!--{$db}--></h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <div  class="custom-search hidden-xs" style="color: #2a6496; width: 100%" >
+                        <form method="get"  action="index.html" class="input-group search-query " style="float:right; margin: 10px;">
+                            <input title="" name="db_name" value="<!--{$db}-->" style="display: none">
+                            <input id="searchTable" type="text" name="table_name" class="form-control" value="<!--{if isset($table)}--><!--{$table}--><!--{else}--><!--{/if}-->" placeholder="Search table here..."  style="color: #2a6496" >
+                            <span class="input-group-btn">
+                                <button class="btn" type="submit" data-original-title="search Table" ><i class="fa fa-search"></i></button>
+                         </span>
+                        </form>
+                    </div>
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>表名</th>
+                            <th>注释 </th>
+                            <th>自动递增值</th>
+                            <th>修改日期</th>
+                            <th>表类型 </th>
+                            <th>行 </th>
+                            <th>表结构 </th>
+                            <th>操作 </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach $tables as $key=>$table}-->
+                        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                            <td><!--{($page-1)*10+$key}--></td>
+                            <td id="tablename"><a href="select.html?db_name=<!--{$table.TABLE_SCHEMA}-->&&table_name=<!--{$table.TABLE_NAME}-->"> <!--{$table.TABLE_NAME}--></a></td>
+                            <td><!--{$table.TABLE_COMMENT}--></td>
+                            <td><!--{$table.AUTO_INCREMENT}--></td>
+                            <td><!--{$table.UPDATE_TIME}--></td>
+                            <td><!--{$table.ENGINE}--></td>
+                            <td><!--{$table.TABLE_ROWS}--></td>
+                            <td>
+                              <form method="post" action="tableinfo.html">
+                                  <input title="" name="db_name" value="<!--{$table.TABLE_SCHEMA}-->" style="display: none">
+                                  <input title="" name="table_name" value="<!--{$table.TABLE_NAME}-->" style="display: none">
+                                  <button type="submit" class="btn btn-info btn-rounded no-margin"  style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                              </form>
+                            </td>
+                            <td>
+                                <form method="post" action="/Manager/Dboperate/execute.html">
+                                    <input title="" name="db_name" value="<!--{$table.TABLE_SCHEMA}-->" style="display: none">
+                                    <input title="" name="table_name" value="<!--{$table.TABLE_NAME}-->" style="display: none">
+                                    <!--{if isset($excuse)}-->
+                                    <a href="select.html?db_name=<!--{$table.TABLE_SCHEMA}-->&&table_name=<!--{$table.TABLE_NAME}-->">
+                                        <button type="button" class="btn btn-success btn-rounded no-margin"  style=" padding: 2px 24px; font-size: xx-small">查询</button>
+                                        </a>
+                                    <button type="submit" class="btn btn-warning btn-rounded  no-margin"  style=" padding: 2px 24px; font-size: xx-small">执行</button>
+                                    <!--{else}-->
+                                    <a href="select.html?db_name=<!--{$table.TABLE_SCHEMA}-->&&table_name=<!--{$table.TABLE_NAME}-->">
+                                        <button type="button" class="btn btn-success btn-rounded no-margin"  style=" padding: 2px 24px; font-size: xx-small">查询</button>
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-rounded no-margin"  style=" padding: 2px 14px; font-size: xx-small">无执行权限</button>
+                                    <!--{/if}-->
+                                </form>
+                            </td>
+                        </tr>
+                        <!--{/foreach}-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--{$page_html}-->
+    </div>
+</div>
+<!--{/if}-->
+

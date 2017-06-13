@@ -1,0 +1,103 @@
+<!-- Row Starts -->
+<div class="row">
+    <div class="col-md-5 col-sm-12 col-xs-12" style="width: 1130px;">
+        <!-- Row Starts -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="widget widget-info">
+                    <div class="widget-header">
+                        <h4><i class="fa fa-file-text-o"></i>添加计划任务 </h4>
+                    </div>
+                    <div class="widget-body" style="margin:30px 0px">
+                        <form id="cronaddForm" method="post" class="form-horizontal" action="/manager/cron/add.html">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label" >任务名称<span style="color: red;">*</span></label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" id="name" name="name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">任务类型<span style="color: red;">*</span></label>
+                                <div class="col-lg-2">
+                                    <select id="type" title="period_unit" name="type"  class="form-control" data-bv-trigger="blur" >
+                                        <option value ="1">定时任务</option>
+                                        <option value ="2">周期任务</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">执行时间<span style="color: red;">*</span></label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control Wdate" id="nxt_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})"  placeholder="xxxx-xx-xx xx:xx:xx" name="nxt_time" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">执行周期</label>
+                                <div class="col-lg-3">
+                                    <input type="text" class="form-control" id="exec_period" name="period_interval" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <select id="period_unit" title="period_unit" name="period_type"  class="form-control" data-bv-trigger="blur" >
+                                        <option value ="1">分</option>
+                                        <option value ="2">时</option>
+                                        <option value ="3">日</option>
+                                        <option value ="4">周</option>
+                                        <option value ="5">月</option>
+                                        <option value ="6">年</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">模块<span style="color: red;">*</span></label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" id="exec_mod" name="exec_mod"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">脚本名称<span style="color: red;">*</span></label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" id="exec_act" name="exec_act"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">开启任务<span style="color: red;">*</span></label>
+                                <div class="col-lg-5">
+                                    <div class="col-lg-5 col-lg-offset-2">
+                                        是&nbsp;&nbsp;<input name="is_valid" value="1" type="radio" checked="">
+                                    </div>
+                                    <div class="col-lg-2 ">
+                                        否&nbsp;&nbsp;<input name="is_valid" value="0" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">任务描述</label>
+                                <div class="col-lg-7">
+                                    <textarea class="form-control" rows="5" name="description" id="description" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-1 col col-lg-offset-5">
+                                    <button type="submit" class="btn btn-warning">添加</button>
+                                </div>
+                                <div class="col-lg-5 ">
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row Ends -->
+    </div>
+</div>
+<!-- Row Ends -->
+
+<!-- validate -->
+<script src="/js/jquery.js"></script>
+<!-- Custom JS -->
+<script src="/js/custom.js"></script>
+<script src="/js/custom-forms.js"></script>
+<script language="javascript" type="text/javascript" src="/js/datepicker/WdatePicker.js"></script>
+<!-- validate end-->

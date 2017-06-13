@@ -1,0 +1,76 @@
+
+
+[database]
+; 数据库配置
+
+; cli使用的数据库配置
+; 默认数据库
+SINASRV_DB_NAME = bch_m_leju_com
+SINASRV_DB_HOST = 58.83.214.132
+SINASRV_DB_PORT = 3702
+SINASRV_DB_USER = taskbchleju
+SINASRV_DB_PASS = uUxcim%g46frt5
+SINASRV_DB_NAME_R = bch_m_leju_com
+SINASRV_DB_HOST_R = 58.83.214.132
+SINASRV_DB_PORT_R = 3702
+SINASRV_DB_USER_R = taskbchleju
+SINASRV_DB_PASS_R = uUxcim%g46frt5
+
+SINASRV_DB2_NAME = bch_m_leju_com
+SINASRV_DB2_HOST = 58.83.214.132
+SINASRV_DB2_PORT = 3702
+SINASRV_DB2_USER = taskbchleju
+SINASRV_DB2_PASS = uUxcim%g46frt5
+SINASRV_DB2_NAME_R = bch_m_leju_com
+SINASRV_DB2_HOST_R = 58.83.214.132
+SINASRV_DB2_PORT_R = 3702
+SINASRV_DB2_USER_R = taskbchleju
+SINASRV_DB2_PASS_R = uUxcim%g46frt5
+
+SINASRV_MEMCACHED_SERVERS = 10.207.26.151:11211
+SINASRV_MEMCACHED_KEY_PREFIX = i_house-
+SINASRV_REDIS_HOST_SHARE = 10.207.26.151:6379
+SINASRV_REDIS_HOST_SHARE2 = 10.207.26.151:6379
+SINASRV_REDIS_HOST_SHARE3 = 10.207.26.151:6379
+SINASRV_REDIS_AUTH = 123
+SINASRV_CACHE_REDIS_HOST = 10.207.26.151:6379
+SINASRV_REDIS_HOST_R = 10.207.26.151:6379
+SINASRV_REDIS_AUTH_R = 123
+
+
+
+[cache]
+; 缓存配置
+
+[hosts]
+; 主机 hosts 配置
+test.host = test1.leju.com
+test.ip = 10.10.72.152
+
+[api]
+; 接口配置
+passport = 10.100.188.76
+passportext = 10.100.188.48
+; 中间层接口
+; 读取api
+dsfee.read.ip = 10.10.221.108
+dsfee.read.host = duqu.com
+; 写入api
+dsfee.save.ip = 10.10.72.75
+dsfee.save.host = xieru.com
+dsfee.save.caller = fee
+dsfee.save.wkey = 503a423d3953f100d2060b80c3270496
+
+[iptables]
+; IP黑/白名单
+; ip白名单，空或者allow为不限制，支持 * - 区间
+; ip黑名单，空或者none为不限制，支持 * - 区间
+
+test.whitelist = allow
+test.blacklist = none
+
+
+[const]
+; 常量配置
+; key = value
+;token = 1234567890

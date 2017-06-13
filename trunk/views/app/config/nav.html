@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> APP首页导航配置</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>排序ID</th>
+                            <th>名称</th>
+                            <th>图片</th>
+                            <th>链接</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$nav_list key=key item=nav}-->
+                        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                            <!--{if isset($smarty.get.update) && $smarty.get.update == $nav.id}-->
+                            <form id="navForm" method="post" action="nav.html?update=<!--{$nav.id}-->">
+                                <input type="text" class="form-control" name="status"  data-bv-trigger="blur" required value="1" style="display: none">
+                                <td class="col-lg-1"><input type="text" class="form-control" name="orderid"  data-bv-trigger="blur" required value="<!--{$nav.orderid}-->"></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="name"  data-bv-trigger="blur" required value="<!--{$nav.name}-->"></td>
+                                <td class="col-lg-2"><input type="text" class="form-control" name="image"  data-bv-trigger="blur" required value="<!--{$nav.pic}-->"></td>
+                                <td class="col-lg-2"><input type="text" class="form-control" name="link"  data-bv-trigger="blur" required value="<!--{$nav.link}-->"></td>
+                                <td class="col-lg-2">
+                                    <button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">修改</button>
+                                </td>
+                            </form>
+                            <!--{else}-->
+                            <td><!--{$nav.orderid}--></td>
+                            <td><!--{$nav.name}--></td>
+                            <td><!--{$nav.pic}--></td>
+                            <td><!--{$nav.link}--></td>
+                            <td>
+                                <a href='nav.html?update=<!--{$nav.id}-->'><button type="submit" class="btn btn-notice btn-rounded no-margin" style="padding: 2px 20px; font-size:x-small">修改</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a  onclick="if(confirm('确认删除导航&nbsp;<!--{$nav.name}-->&nbsp;吗？')){location.href='?delete=<!--{$nav.id}-->'}"><button type="button" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <!--{if $nav.status=="0"}-->
+                                <a href='?hidden=<!--{$nav.id}-->&status=1'><button type="button" class="btn btn-warning btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">启用</button> </a>
+                                <!--{elseif $nav.status=="1"}-->
+                                <a href='?hidden=<!--{$nav.id}-->&status=0'><button type="button" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">禁用</button> </a>
+                                <!--{/if}-->
+                            </td>
+                            <!--{/if}-->
+                        </tr>
+                        <!--{/foreach}-->
+                        <tr>
+                            <form method="post" action="nav.html">
+                                <td class="col-lg-1"><input type="text" class="form-control" name="orderid"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="name"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-2"><input type="text" class="form-control" name="image"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-2"><input type="text" class="form-control" name="link"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-2">
+                                    <button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">添加</button>
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

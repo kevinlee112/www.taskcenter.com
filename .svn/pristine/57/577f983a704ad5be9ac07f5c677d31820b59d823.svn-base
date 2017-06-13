@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> 组件列表</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>组件ID</th>
+                            <th>组件名称</th>
+                            <th>是否显示</th>
+                            <th>排列顺序</th>
+                            <th>组件操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$composerList key=key item=composer}-->
+                        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                            <td><!--{$composer.id}--></td>
+                            <td><!--{$composer.cn_name}--></td>
+                            <td><!--{if $composer.is_show=="N"}-->否<!--{else}-->是<!--{/if}--></td>
+                            <td><!--{$composer.orderid}--></td>
+                            <td>
+                                <a href='/manager/controller/index.html?compose_id=<!--{$composer.id}-->'><button type="submit" class="btn btn-info btn-rounded no-margin" style=" padding: 2px 24px; font-size:x-small">资源管理</button>  </a>&nbsp;|&nbsp;
+                                <a href='Update.html?id=<!--{$composer.id}-->'><button type="submit" class="btn btn-notice btn-rounded no-margin" style="padding: 2px 20px; font-size:x-small">修改</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a  onclick="if(confirm('确认删除组件&nbsp;<!--{$composer.cn_name}-->&nbsp;吗？')){location.href='Delete.html?id=<!--{$composer.id}-->'}"><button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <!--{if $composer.en_name <> 'sys'}-->
+                                <!--{if $composer.is_show=="N"}-->
+                                <a href='Hidden.html?id=<!--{$composer.id}-->&is_show=<!--{$composer.is_show}-->'><button type="submit" class="btn btn-warning btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">显示</button> </a>
+                                <!--{elseif $composer.is_show=="Y"}-->
+                                <a href='Hidden.html?id=<!--{$composer.id}-->&is_show=<!--{$composer.is_show}-->'><button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">隐藏</button> </a>
+                                <!--{/if}-->
+                                <!--{/if}-->
+                            </td>
+
+                        </tr>
+                        <!--{/foreach}-->
+                        </tbody>
+                    </table>
+                    <div class="widget-body" style="height: 80px;">
+                        <!--{$page_html}-->
+                        <div  style="float: right; margin: 10px">
+                            <a href="Add.html"><button type="button" class="btn btn-warning">添加组件</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> 缓存监控Key管理</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>监控KEY</th>
+                            <th>监控位置</th>
+                            <th>类型</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$cache_list key=key item=cache}-->
+                        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                            <!--{if isset($smarty.get.page)}-->
+                            <td><!--{$smarty.get.page*10-9+$key}--></td>
+                            <!--{else}-->
+                            <td><!--{$key+1}--></td>
+                            <!--{/if}-->
+                            <td><!--{$cache.key}--></td>
+                            <td><!--{$cache.source}--></td>
+                            <td><!--{$cache.type}--></td>
+                            <td>
+                                &nbsp;&nbsp;
+                                <a  href='?delete=<!--{$cache.id}-->'><button type="button" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 24px; font-size:x-small">删除</button> </a>
+                            </td>
+                        </tr>
+                        <!--{/foreach}-->
+                        <tr>
+                            <form method="post" action="cachekey.html">
+                                <td class="col-lg-1"></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="key"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-1">
+                                    <select id="source" title="source" name="source"  class="form-control" data-bv-trigger="blur" >
+                                        <option value ="Redis">Redis</option>
+                                        <option value ="Memcache">Memcache</option>
+                                    </select>
+                                </td>
+                                <td class="col-lg-1">
+                                    <select id="type" title="type" name="type"  class="form-control" data-bv-trigger="blur" >
+                                        <option value ="string">string</option>
+                                        <option value ="list">list</option>
+                                        <option value ="hash">hash</option>
+                                        <option value ="set">set</option>
+                                        <option value ="zset">zset</option>
+                                    </select>
+                                </td>
+                                <td class="col-lg-2">
+                                    &nbsp;&nbsp;
+                                    <button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 24px; font-size:x-small">添加</button>
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="widget-body" style="height: 80px;">
+                        <!--{$page_html}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery.js"></script>
+<script>
+    $(function(){
+        $("#source").change(function(){
+            var val=$('#source').val();
+            if(val=='Memcache'){
+                $('#type').empty();
+                var option = $("<option>").val('string').text("string");
+                $('#type').append(option);
+            }
+            else{
+                $('#type').empty();
+                var option = $("<option>").val('string').text("string");
+                var option1 = $("<option>").val('list').text("list");
+                var option2 = $("<option>").val('hash').text("hash");
+                var option3 = $("<option>").val('set').text("set");
+                var option4 = $("<option>").val('zset').text("zset");
+                $('#type').append(option, option1, option2, option3, option4);
+            }
+
+        });
+    });
+</script>
+

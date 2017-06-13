@@ -1,0 +1,276 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> APP升级配置</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive clearfix" >
+
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">IOS<a href="#" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                                    <i class="fa fa-cog"></i>
+                                </a></h3>
+                            </div>
+                            <div class="panel-body">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="widget widget-info">
+                                            <div class="widget-body">
+                                                <form id="updateForm" method="post" class="form-horizontal" action="/app/config/update.html?<!--{if isset($smarty.get.update)}-->update=<!--{$smarty.get.update}--><!--{elseif isset($smarty.get.add)}-->add=iphone<!--{/if}-->">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">升级标题 <span style="color: red;">*</span></label>
+                                                        <input type="text" class="form-control" name="device" id="device" data-bv-trigger="blur" required value="iphone" style="display: none">
+                                                        <div class="col-lg-7">
+                                                            <!--{if isset($smarty.get.update) && $smarty.get.update == $update.iphone.id}-->
+                                                            <input type="text" class="form-control" name="title" id="title" data-bv-trigger="blur" required value="<!--{$update.iphone.title}-->">
+                                                            <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'iphone'}-->
+                                                            <input type="text" class="form-control" name="title" id="title1" data-bv-trigger="blur" required value="<!--{$update.iphone.title}-->">
+                                                            <!--{else}-->
+                                                            <input type="text" class="form-control" name="new_function" id="title2" readonly data-bv-trigger="blur" required value="<!--{$update.iphone.title}-->">
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">升级版本 <span style="color: red;">*</span></label>
+                                                        <div class="col-lg-5">
+                                                            <!--{if isset($smarty.get.update) && $smarty.get.update == $update.iphone.id}-->
+                                                            <input type="text" class="form-control" name="latest_version" id="latest_version" data-bv-trigger="blur" required value="<!--{$update.iphone.latest_version}-->">
+                                                            <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'iphone'}-->
+                                                            <input type="text" class="form-control" name="latest_version" id="latest_version1" data-bv-trigger="blur" required value="<!--{$update.iphone.latest_version}-->">
+                                                            <!--{else}-->
+                                                            <input type="text" class="form-control" name="new_function" id="latest_version2" readonly data-bv-trigger="blur" required value="<!--{$update.iphone.latest_version}-->">
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group ">
+                                                        <label class="col-lg-3 control-label">website<span style="color: red;">*</span></label>
+                                                        <div class="col-lg-7">
+                                                            <!--{if isset($smarty.get.update) && $smarty.get.update == $update.iphone.id}-->
+                                                            <input type="text" class="form-control" name="website" id="website" data-bv-trigger="blur" required value="<!--{$update.iphone.website}-->">
+                                                            <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'iphone'}-->
+                                                            <input type="text" class="form-control" name="website" id="website1" data-bv-trigger="blur" required value="<!--{$update.iphone.website}-->">
+                                                            <!--{else}-->
+                                                            <input type="text" class="form-control" name="new_function" id="website2" readonly data-bv-trigger="blur" required value="<!--{$update.iphone.website}-->">
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group ">
+                                                        <label class="col-lg-3 control-label">web_url<span style="color: red;">*</span></label>
+                                                        <div class="col-lg-7">
+                                                            <!--{if isset($smarty.get.update) && $smarty.get.update == $update.iphone.id}-->
+                                                            <input type="text" class="form-control" name="web_url" id="web_url" data-bv-trigger="blur" required value="<!--{$update.iphone.web_url}-->">
+                                                            <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'iphone'}-->
+                                                            <input type="text" class="form-control" name="web_url" id="web_url1" data-bv-trigger="blur" required value="<!--{$update.iphone.web_url}-->">
+                                                            <!--{else}-->
+                                                            <input type="text" class="form-control" name="new_function" id="web_url2" readonly data-bv-trigger="blur" required value="<!--{$update.iphone.web_url}-->">
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group ">
+                                                        <label class="col-lg-3 control-label">app_url<span style="color: red;">*</span></label>
+                                                        <div class="col-lg-7">
+                                                            <!--{if isset($smarty.get.update) && $smarty.get.update == $update.iphone.id}-->
+                                                            <input type="text" class="form-control" name="app_url" id="app_url" data-bv-trigger="blur" required value="<!--{$update.iphone.app_url}-->">
+                                                            <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'iphone'}-->
+                                                            <input type="text" class="form-control" name="app_url" id="app_url1" data-bv-trigger="blur" required value="<!--{$update.iphone.app_url}-->">
+                                                            <!--{else}-->
+                                                            <input type="text" class="form-control" name="new_function" id="app_url2" readonly data-bv-trigger="blur" required value="<!--{$update.iphone.app_url}-->">
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">强制更新<span style="color: red;">*</span></label>
+                                                        <div class="col-lg-5">
+                                                            <!--{if $update.iphone.force == '1'}-->
+                                                            <div class="col-lg-5 col-lg-offset-1">
+                                                                是&nbsp;&nbsp;<input name="force" value="1" type="radio" checked="">
+                                                            </div>
+                                                            <div class="col-lg-5 col-lg-offset-1">
+                                                                否&nbsp;&nbsp;<input name="force" value="0" type="radio">
+                                                            </div>
+                                                            <!--{else}-->
+                                                            <div class="col-lg-5 col-lg-offset-1">
+                                                                是&nbsp;&nbsp;<input name="force" value="1" type="radio">
+                                                            </div>
+                                                            <div class="col-lg-5 col-lg-offset-1" >
+                                                                否&nbsp;&nbsp;<input name="force" value="0" type="radio" checked="">
+                                                            </div>
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">更新内容<span style="color: red;">*</span></label>
+                                                        <div class="col-lg-7">
+                                                            <!--{if isset($smarty.get.update) && $smarty.get.update == $update.iphone.id}-->
+                                                            <textarea class="form-control" rows="3" name="new_function" id="new_function"><!--{$update.iphone.new_function}--></textarea>
+                                                            <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'iphone'}-->
+                                                            <textarea class="form-control" rows="3" name="new_function" id="new_function1" ><!--{$update.iphone.new_function}--></textarea>
+                                                            <!--{else}-->
+                                                            <textarea class="form-control" rows="3" name="new_function" id="new_function2" readonly ><!--{$update.iphone.new_function}--></textarea>
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-lg-7 col-lg-offset-4">
+                                                            <!--{if (isset($smarty.get.update) && $smarty.get.update == $update.iphone.id) || (isset($smarty.get.add) && $smarty.get.add == 'iphone')}-->
+                                                            <button type="submit" class="btn btn-warning">提交</button>
+                                                            <button type="reset" class="btn btn btn-default" style="margin-left: 50px;">重置</button>
+                                                            <!--{else}-->
+                                                            <a href="update.html?add=iphone"> <button type="button" class="btn btn-warning">添加</button></a>
+                                                            <a href="update.html?update=<!--{$update.iphone.id}-->"><button type="button" class="btn btn btn-default" style="margin-left: 50px;">修改</button></a>
+                                                            <!--{/if}-->
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Android<a href="#" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                                    <i class="fa fa-cog"></i>
+                                </a></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="widget widget-info">
+                                        <div class="widget-body">
+                                            <form id="androidForm" method="post" class="form-horizontal" action="/app/config/update.html?<!--{if isset($smarty.get.update)}-->update=<!--{$smarty.get.update}--><!--{elseif isset($smarty.get.add)}-->add=android<!--{/if}-->">
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">升级标题 <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control" name="device" id="android_device" data-bv-trigger="blur" required value="android" style="display: none">
+                                                    <div class="col-lg-7">
+                                                        <!--{if isset($smarty.get.update) && $smarty.get.update == $update.android.id}-->
+                                                        <input type="text" class="form-control" name="title" id="android_title" data-bv-trigger="blur" required value="<!--{$update.android.title}-->">
+                                                        <!--{elseif  isset($smarty.get.add)}-->
+                                                        <input type="text" class="form-control" name="title" id="android_title1" data-bv-trigger="blur" required value="<!--{$update.android.title}-->">
+                                                        <!--{else}-->
+                                                        <input type="text" class="form-control" name="new_function" id="android_title2" readonly data-bv-trigger="blur" required value="<!--{$update.android.title}-->">
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">升级版本 <span style="color: red;">*</span></label>
+                                                    <div class="col-lg-5">
+                                                        <!--{if isset($smarty.get.update) && $smarty.get.update == $update.android.id}-->
+                                                        <input type="text" class="form-control" name="latest_version" id="android_latest_version" data-bv-trigger="blur" required value="<!--{$update.android.latest_version}-->">
+                                                        <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'android'}-->
+                                                        <input type="text" class="form-control" name="latest_version" id="android_latest_version1" data-bv-trigger="blur" required value="<!--{$update.android.latest_version}-->">
+                                                        <!--{else}-->
+                                                        <input type="text" class="form-control" name="new_function" id="android_latest_version2" readonly data-bv-trigger="blur" required value="<!--{$update.android.latest_version}-->">
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group ">
+                                                    <label class="col-lg-3 control-label">website<span style="color: red;">*</span></label>
+                                                    <div class="col-lg-7">
+                                                        <!--{if isset($smarty.get.update) && $smarty.get.update == $update.android.id}-->
+                                                        <input type="text" class="form-control" name="website" id="android_website" data-bv-trigger="blur" required value="<!--{$update.android.website}-->">
+                                                        <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'android'}-->
+                                                        <input type="text" class="form-control" name="website" id="android_website1" data-bv-trigger="blur" required value="<!--{$update.android.website}-->">
+                                                        <!--{else}-->
+                                                        <input type="text" class="form-control" name="new_function" id="android_website2" readonly data-bv-trigger="blur" required value="<!--{$update.android.website}-->">
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group ">
+                                                    <label class="col-lg-3 control-label">web_url<span style="color: red;">*</span></label>
+                                                    <div class="col-lg-7">
+                                                        <!--{if isset($smarty.get.update) && $smarty.get.update == $update.android.id}-->
+                                                        <input type="text" class="form-control" name="web_url" id="android_web_url" data-bv-trigger="blur" required value="<!--{$update.android.web_url}-->">
+                                                        <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'android'}-->
+                                                        <input type="text" class="form-control" name="web_url" id="android_web_url1" data-bv-trigger="blur" required value="<!--{$update.android.web_url}-->">
+                                                        <!--{else}-->
+                                                        <input type="text" class="form-control" name="new_function" id="android_web_url2" readonly data-bv-trigger="blur" required value="<!--{$update.android.web_url}-->">
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group ">
+                                                    <label class="col-lg-3 control-label">app_url<span style="color: red;">*</span></label>
+                                                    <div class="col-lg-7">
+                                                        <!--{if isset($smarty.get.update) && $smarty.get.update == $update.android.id}-->
+                                                        <input type="text" class="form-control" name="app_url" id="android_app_url" data-bv-trigger="blur" required value="<!--{$update.android.app_url}-->">
+                                                        <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'android'}-->
+                                                        <input type="text" class="form-control" name="app_url" id="android_app_url1" data-bv-trigger="blur" required value="<!--{$update.android.app_url}-->">
+                                                        <!--{else}-->
+                                                        <input type="text" class="form-control" name="new_function" id="android_app_url2" readonly data-bv-trigger="blur" required value="<!--{$update.android.app_url}-->">
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">强制更新<span style="color: red;">*</span></label>
+                                                    <div class="col-lg-5">
+                                                        <!--{if $update.android.force == '1'}-->
+                                                        <div class="col-lg-5 col-lg-offset-1">
+                                                            是&nbsp;&nbsp;<input name="force" value="1" type="radio" checked="" >
+                                                        </div>
+                                                        <div class="col-lg-5 col-lg-offset-1">
+                                                            否&nbsp;&nbsp;<input name="force" value="0" type="radio">
+                                                        </div>
+                                                        <!--{else}-->
+                                                        <div class="col-lg-5 col-lg-offset-1">
+                                                            是&nbsp;&nbsp;<input name="force" value="1" type="radio">
+                                                        </div>
+                                                        <div class="col-lg-5 col-lg-offset-1">
+                                                            否&nbsp;&nbsp;<input name="force" value="0" type="radio" checked="">
+                                                        </div>
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">更新内容<span style="color: red;">*</span></label>
+                                                    <div class="col-lg-7">
+                                                        <!--{if isset($smarty.get.update) && $smarty.get.update == $update.android.id}-->
+                                                        <textarea class="form-control" rows="3" name="new_function" id="android_new_function"><!--{$update.android.new_function}--></textarea>
+                                                        <!--{elseif  isset($smarty.get.add) && $smarty.get.add == 'android'}-->
+                                                        <textarea class="form-control" rows="3" name="new_function" id="android_new_function1"><!--{$update.android.new_function}--></textarea>
+                                                        <!--{else}-->
+                                                        <textarea class="form-control" rows="3" name="new_function" readonly id="android_new_function2"><!--{$update.android.new_function}--></textarea>
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-7 col-lg-offset-4">
+                                                        <!--{if (isset($smarty.get.update) && $smarty.get.update == $update.android.id) || (isset($smarty.get.add) && $smarty.get.add == 'android')}-->
+                                                        <button type="submit" class="btn btn-warning">提交</button>
+                                                        <button type="reset" class="btn btn btn-default" style="margin-left: 50px;">重置</button>
+                                                        <!--{else}-->
+                                                        <a href="update.html?add=android"> <button type="button" class="btn btn-warning">添加</button></a>
+                                                        <a href="update.html?update=<!--{$update.android.id}-->"><button type="button" class="btn btn btn-default" style="margin-left: 50px;">修改</button></a>
+                                                        <!--{/if}-->
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

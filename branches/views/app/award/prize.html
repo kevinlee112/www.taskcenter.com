@@ -1,0 +1,94 @@
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> <!--{$title}--></h4>
+            </div>
+            <div class="widget-body">
+                <form id="awardForm" method="post" class="form-horizontal" action="/app/award/prize.html">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">奖品列表</label>
+                        <div class="col-lg-6">
+                            <textarea class="form-control" rows="3" name="award_list" id="award_list"><!--{$prizeinfo}--></textarea><br>
+                            <button class="btn btn-success btn-rounded" type="button" id="getprize">获取奖品</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">奖品列表文案</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" name="award_list_title" type="input" id="award_list_title" value="<!--{$info.award_list_title}-->"  required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">奖品列表文字颜色</label>
+                        <div class="col-lg-7">
+                            <input class="form-control jscolor" name="award_list_title_color" id="award_list_title_color" value="<!--{$info.award_list_title_color}-->" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">日常任务文案</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" name="task_title" type="input" id="task_title" value="<!--{$info.task_title}-->"  required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">日常任务文字颜色</label>
+                        <div class="col-lg-7">
+                            <input class="form-control jscolor" name="task_title_color" value="<!--{$info.task_title_color}-->" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">赞助商</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" name="ad_provider" value="<!--{$info.ad_provider}-->" required>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="<!--{$id}-->">
+                    <input type="hidden" name="project_id" value="<!--{$awardInfo.project_id}-->" id="project_id">
+                    <input type="hidden" name="activity_id" value="<!--{$awardInfo.activity_id}-->" id="activity_id">
+
+                    <div class="form-group">
+                        <div class="col-lg-7 col-lg-offset-4">
+                            <button type="submit" class="btn btn-warning">提交</button>
+                            <button type="reset" class="btn btn btn-default" style="margin-left: 50px;">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+   .col-lg-4{
+       width:18.3333%;
+   }
+</style>
+<script src="/js/jscolor.js"></script>
+<script src="/js/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#getprize').click(function(){
+            var project_id = $("#project_id").val();
+            var activity_id = $("#activity_id").val();
+            $.ajax({
+                type:'post',
+                url:"/app/award/checkactivity.json",
+                data: "project_id="+project_id+"&activity_id="+activity_id+"&type=prize",
+                dataType:'json',
+                success:function(data){
+                    if(data.error == '0')
+                    {
+                        $("#award_list").val(data.result);
+                    }
+                }
+            })
+        });
+    })
+</script>

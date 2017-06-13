@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i>修改资源</h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="post" class="form-horizontal" action="/manager/controller/update.html" data-bv-message="此值无效"
+                      data-bv-feedbackicons-valid="fa fa-check" data-bv-feedbackicons-invalid="fa fa-times"
+                      data-bv-feedbackicons-validating="fa fa-refresh">
+                    <input type='hidden' name='id' value="<!--{$smarty.get.id}-->">
+                    <div class="form-group has-feedback">
+                        <label class="col-lg-6 control-label" style="width: 300px">所属组件</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" name="compose_id">
+                                <option value="">请选择</option>
+                                <!--{if $compose_list}-->
+                                <!--{foreach from=$compose_list key=compose_id item=compose_name}-->
+                                <option value="<!--{$compose_id}-->" <!--{if $compose_id == $controller_info.compose_id}-->selected="selected"
+                                <!--{/if}-->><!--{$compose_name}--></option>
+                                <!--{/foreach}-->
+                                <!--{/if}-->
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label class="col-lg-6 control-label" style="width: 300px">controller名称：</label>
+                        <div class="col-lg-6">
+                            <input type="text" required="required" pattern="^[a-zA-Z][a-zA-Z0-9_]*$"
+                                   data-bv-regexp-message="只能数字字母下划线" data-bv-notempty-message="请填写名称" class="form-control" name="func_name"
+                                   value='<!--{$controller_info.func_name|default:" "}-->'
+                                   data-bv-field="ccNumber"><i class="form-control-feedback" data-bv-icon-for="ccNumber" style="display: none;"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label class="col-lg-6 control-label" style="width: 300px">controller中文名称：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="func_name_cn" value='<!--{$controller_info.func_name_cn|default:""}-->'
+                                   required="required" pattern="^[\u4e00-\u9fa5]{0,}$"
+                                   data-bv-regexp-message="请填写中文" data-bv-notempty-message="请填写中文名称"
+                            ><i class="form-control-feedback" data-bv-icon-for="expMonth"
+                                style="display: none;"></i>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label class="col-lg-6 control-label" style="width: 300px">排序</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" placeholder="number" value='<!--{$controller_info.order_id|default:0}-->'
+                                   pattern="^[0-9]+$"
+                                   data-bv-regexp-message="请填写数字"
+                                   name="order_id" data-stripe="exp-month" data-bv-field="expMonth" data-bv-notempty-message="默认请填0" required><i
+                                class="form-control-feedback"
+                                data-bv-icon-for="expMonth"
+                                style="display: none;"></i>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group" align="center">
+                        <button type="submit" class="btn btn btn-success">修改</button>
+                        <button type="button" class="btn btn btn-default" onclick="history.go(-1)" style="margin-left: 50px;">返回</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

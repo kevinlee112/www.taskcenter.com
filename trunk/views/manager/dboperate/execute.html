@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> 执行Sql</h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="post" class="form-horizontal" action="/manager/dboperate/execute.html">
+
+
+
+                    <td><!--{if isset($sql_err)&&$sql_err!==''}-->
+                        <div class="alert alert-warning">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>Warning!</strong> <!--{$sql_err}-->
+                        </div><!--{else}--><!--{/if}--></td>
+
+
+                    <input type="hidden" name='db_name' value="<!--{$smarty.post.db_name}-->">
+                    <input type="hidden" name='table_name' value="<!--{$smarty.post.table_name}-->">
+                    <input type="hidden" name='exec' value="exec">
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="widget-body">
+                            <textarea class="form-control" name="sql" rows="5" id="form-control" required data-bv-notempty-message="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请填写Sql"><!--{if isset($sql)}--><!--{$sql}-->
+                                <!--{/if}--></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-1 col-lg-offset-1">
+                            <button class="btn btn-success" type="submit">执行</button>
+                        </div>
+                    </div>
+
+
+                </form>
+                <!--{if isset($result) &&!empty($result) && $is_post=='1'&&$explain_table=='1'}-->
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>select_type</th>
+                            <th>table</th>
+                            <th>type</th>
+                            <th>possible_keys</th>
+                            <th>key</th>
+                            <th>key_len</th>
+                            <th>ref</th>
+                            <th>rows</th>
+                            <th>Extra</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{if isset($result)}-->
+                        <!--{foreach from=$result item=result_info}-->
+                        <tr class="info">
+                            <td><!--{$result_info.id}--></td>
+                            <td><!--{$result_info.select_type}--></td>
+                            <td><!--{$result_info.table}--></td>
+                            <td><!--{$result_info.type}--></td>
+                            <td><!--{$result_info.possible_keys|default:'NULL'}--></td>
+                            <td><!--{$result_info.key|default:'NULL'}--></td>
+                            <td><!--{$result_info.key_len|default:'NULL'}--></td>
+                            <td><!--{$result_info.ref|default:'NULL'}--></td>
+                            <td><!--{$result_info.rows}--></td>
+                            <td><!--{$result_info.Extra}--></td>
+                        </tr>
+                        <!--{/foreach}-->
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <!--{/if}-->
+            </div>
+            <!--{elseif isset($result) &&($result!==false) && $is_post=='1'&&$explain_table=='0'}-->
+
+            <div class="table-responsive">
+                <table class="table table-bordered no-margin">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>执行结果</th>
+                        <th>受影响行</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="info">
+                        <td>1</td>
+                        <td> <!--{if isset($result) && $result!=="false"}-->成功<!--{else}-->失败<!--{/if}--></td>
+                        <td><!--{if isset($result)}--><!--{$result}--><!--{/if}--></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--{/if}-->
+
+        </div>
+    </div>
+</div>
+<style>
+    table {
+        text-align: center;
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table td {
+        vertical-align: middle;
+    }
+</style>
+
+<script>
+    window.onload = function () {
+        document.getElementById('form-control').focus();
+    }
+</script>

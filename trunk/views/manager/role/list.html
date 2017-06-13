@@ -1,0 +1,70 @@
+<div class="row" >
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> <!--{$title}--></h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="post" class="form-horizontal" action="/manager/role/list.html" data-bv-message="This value is not valid" data-bv-feedbackicons-valid="fa fa-check" data-bv-feedbackicons-invalid="fa fa-times" data-bv-feedbackicons-validating="fa fa-refresh">
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label">角色名称:</label>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" name="name" value="<!--{$name}-->" placeholder="请输入角色名称"/>
+                        </div>
+                        <label class="col-lg-1 control-label">角色编码:</label>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" name="code" value="<!--{$code}-->" placeholder="请输入角色编码"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-1 col-lg-offset-1">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>角色名称</th>
+                                <th>角色编号</th>
+                                <th>添加时间</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <!--{if $list}-->
+                            <!--{foreach from=$list item=v key=key}-->
+                            <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                                <td><!--{$v.id}--></td>
+                                <td><!--{$v.name}--></td>
+                                <td><!--{$v.code}--></td>
+                                <td><!--{$v.addtime|date_format:'%Y-%m-%d %H:%M:%S'}--></td>
+                                <td><!--{$v.edittime|date_format:'%Y-%m-%d %H:%M:%S'}--></td>
+                                <td>
+                                    <a href="/manager/role/update.html?id=<!--{$v.id}-->" ><button type="submit" class="btn btn-info btn-rounded no-margin" style=" padding: 2px 24px; font-size:x-small">编辑</button></a>&nbsp;&nbsp;
+                                    |&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small" onclick="if(confirm('确认删除管理员吗？')){location.href='/manager/role/del.html?id=<!--{$v.id}-->'}">删除</button>
+                                </td>
+                            </tr>
+                            <!--{/foreach}-->
+                        <!--{/if}-->
+                        </tbody>
+                    </table>
+                    <!--{$page_html}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    table{
+        text-align: center;
+    }
+    table th
+    {
+        text-align: center;
+    }
+</style>

@@ -1,0 +1,483 @@
+<div class="clearfix">
+    <!-- Search bar start -->
+    <div  class="custom-search hidden-xs" style=" margin: 10px; color: #2a6496; width: 100%" >
+        <a href='?name=redis'><button class="btn btn-primary btn-rounded <!--{if $name!==redis}--> btn-borderd <!--{/if}-->" type="button" name="redis">默认redis</button></a>
+        <a href='?name=mf_redis'><button class="btn btn-primary btn-rounded <!--{if $name!==mf_redis}--> btn-borderd <!--{/if}-->" type="button" name="mf_redis">买房redis</button></a>
+        <a href='?name=wx_redis'><button class="btn btn-primary btn-rounded <!--{if $name!==wx_redis}--> btn-borderd <!--{/if}-->" type="button" name="wx_redis">微信redis</button></a>
+        <form method="get" class="input-group search-query " style="float:right;">
+            <input id="searchCache" type="text" name="key" class="form-control"  placeholder="Search here..." value="<!--{if isset($searchName)}--><!--{$searchName}--><!--{else}--><!--{/if}-->" style="color: #2a6496;width: 400px;" >
+            <input id="searchHiden" type="text" name="name" class="form-control"  value="<!--{$name}-->" style="display: none" >
+            <span class="input-group-btn">
+                                <button class="btn" type="submit" data-original-title="search Redis" ><i class="fa fa-search"></i></button>
+                         </span>
+        </form>
+    </div>
+    <!-- Search bar end -->
+
+    <!-- List bar start -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel-group" id="accordion">
+            <!--{if isset($redisList)}-->
+            <div class="panel panel-info">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisCache K-V
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <!--{if isset($redisList.key)}-->
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="widget widget-info">
+                                <div class="widget-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered no-margin center-align-text" >
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>key</th>
+                                                <th>value</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!--{$i=1}-->
+                                            <!--{foreach $redisList.key as $key=>$val}-->
+                                            <tr class="<!--{if $i % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                                                <td><!--{$i++}--></td>
+                                                <td><!--{$key}--></td>
+                                                <td>
+                                                    <div class="widget-body col-md-2 no-margin no-padding">
+                                                        <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$i}-->" style=" padding: 2px 44px; font-size: xx-small">查看</button>
+                                                        <div id="dropper<!--{$i}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div id="dropping1" style="display: block;">
+                                                                            <textarea style="width: 560px;height: 760px" title=""><!--{$val}--></textarea></div>
+                                                                    </div>
+                                                                    <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                                                × Cancel
+                                                                                <span class="fa fa-bullhorn "></span>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <!--{/foreach}-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{else}-->
+                        <h4 class="panel-title" style="text-align: center">
+                           没有数据
+                        </h4>
+                        <!--{/if}-->
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning" >
+                <div class="panel-heading"  data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisCache List
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <!--{if isset($redisList.list)}-->
+                        <div class="row">
+                            <!--{foreach $redisList.list as $key=>$val}-->
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="widget widget-info widget-stack">
+                                    <div class="widget-header" >
+                                        <h4><i class="fa fa-pencil"></i>key:<!--{$key}--></h4>
+                                        <h4 style="margin-left: 20px"></i>count:<!--{$redisList.count.list.$key}--></h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <textarea title="" style="width: 100%; height: 400px"><!--{$val}--></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--{/foreach}-->
+                        </div>
+                        <!--{else}-->
+                        <h4 class="panel-title" style="text-align: center">
+                            没有数据
+                        </h4>
+                        <!--{/if}-->
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success" >
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisCache Hash
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <!--{if isset($redisList.hash)}-->
+                        <div class="row">
+                            <!--{foreach $redisList.hash as $key=>$val}-->
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="widget widget-info">
+                                    <div class="widget-header">
+                                        <h4><i class="fa fa-file-text-o"></i> key:<!--{$key}--></h4>
+                                        <h4 style="margin-left: 20px"> count:<!--{$redisList.count.hash.$key}--></h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered no-margin">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Field</th>
+                                                    <th>Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!--{$i=1}-->
+                                                <!--{foreach $val as $field => $value}-->
+                                                <tr class="<!--{if $i % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                                                    <td><!--{$i++}--></td>
+                                                    <td><!--{$field}--></td>
+                                                    <td> <div class="widget-body no-margin no-padding">
+                                                        <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$key}--><!--{$field}-->" style=" padding: 2px 44px; font-size: xx-small">查看</button>
+                                                        <div id="dropper<!--{$key}--><!--{$field}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div id="droppingTwo" style="display: block;">
+                                                                            <textarea title="" style="width: 560px;height: 760px"><!--{$value}--></textarea></div>
+                                                                    </div>
+                                                                    <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                                                × Cancel
+                                                                                <span class="fa fa-bullhorn "></span>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></td>
+                                                </tr>
+                                                <!--{/foreach}-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--{/foreach}-->
+                        </div>
+                        <!--{else}-->
+                        <h4 class="panel-title" style="text-align: center">
+                            没有数据
+                        </h4>
+                        <!--{/if}-->
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-facebook">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisCache Set
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <!--{if isset($redisList.set)}-->
+                        <!--{foreach $redisList.set as $key=>$val}-->
+                        <div class="col-md-4 col-md-8 col-sm-4 col-xs-12 widget-body" style="width: 1000px; margin-bottom: 20px">
+                            <div class="panel panel-yellow" >
+                                <div class="panel-heading note-toolbar btn-toolbar">
+                                    <h3 class="panel-title ">key：<!--{$key}-->&nbsp;&nbsp;&nbsp;&nbsp;count：<!--{$redisList.count.set.$key}--></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!--{foreach $val as $v}-->
+                                    <textarea title="" style="width: 100%; height: 200px"><!--{$v}--></textarea>
+                                    <!--{/foreach}-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--{/foreach}-->
+                        <!--{else}-->
+                        <h4 class="panel-title" style="text-align: center">
+                            没有数据
+                        </h4>
+                        <!--{/if}-->
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisCache Sort Set
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <!--{if isset($redisList.zset)}-->
+                        <!--{foreach $redisList.zset as $key=>$val}-->
+                        <div class="row">
+                            <div class="col-md-4 col-md-8 col-sm-4 col-xs-12 widget-body" style="width: 1000px; margin-bottom: 20px">
+                                <div class="panel panel-danger" >
+                                    <div class="panel-heading note-toolbar btn-toolbar">
+                                        <h3 class="panel-title ">key：<!--{$key}-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count：<!--{$redisList.count.zset.$key}--></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <textarea title="" style="width: 100%; height: 300px"><!--{$val}--></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{/foreach}-->
+                        <!--{else}-->
+                        <h4 class="panel-title" style="text-align: center">
+                            没有数据
+                        </h4>
+                        <!--{/if}-->
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+            <!--search result start-->
+            <!--{if isset($searchList)}-->
+            <!--{if isset($searchList.key)}-->
+            <div class="panel panel-info">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOnes" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisSearchCache K-V
+                    </h4>
+                </div>
+                <div id="collapseOnes" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="widget widget-info">
+                                <div class="widget-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered no-margin" >
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>key</th>
+                                                <th>value</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!--{$i=1}-->
+                                            <!--{foreach $searchList.key as $key=>$val}-->
+                                            <tr class="<!--{if $i % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                                                <td><!--{$i++}--></td>
+                                                <td><!--{$key}--></td>
+                                                <td>
+                                                    <div class="widget-body col-md-2 no-margin no-padding">
+                                                        <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#droppers<!--{$i}-->" style=" padding: 2px 44px; font-size: xx-small">查看</button>
+                                                        <div id="droppers<!--{$i}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div id="dropping" style="display: block;">
+                                                                            <textarea title="" style="width: 560px;height: 760px"><!--{$val}--></textarea></div>
+                                                                    </div>
+                                                                    <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                                                × Cancel
+                                                                                <span class="fa fa-bullhorn "></span>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <!--{/foreach}-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+            <!--{if isset($searchList.list)}-->
+            <div class="panel panel-warning" >
+                <div class="panel-heading"  data-toggle="collapse" data-parent="#accordion" href="#collapseTwos" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisSearchCache List
+                    </h4>
+                </div>
+                <div id="collapseTwos" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <!--{foreach $searchList.list as $key=>$val}-->
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="widget widget-info widget-stack">
+                                    <div class="widget-header" >
+                                        <h4><i class="fa fa-pencil"></i>key:<!--{$key}--> </h4>
+                                        <h4 style="margin-left: 20px">count:<!--{$searchList.count.list.$key}--></h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <textarea style="width: 100%; height: 400px"><!--{$val}--></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--{/foreach}-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+            <!--{if isset($searchList.hash)}-->
+            <div class="panel panel-success" >
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThrees" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisSearchCache Hash
+                    </h4>
+                </div>
+                <div id="collapseThrees" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <!--{foreach $searchList.hash as $key=>$val}-->
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="widget widget-info">
+                                    <div class="widget-header">
+                                        <h4><i class="fa fa-file-text-o"></i> key:<!--{$key}--> </h4>
+                                        <h4 style="margin-left: 20px">count:<!--{$searchList.count.hash.$key}--></h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered no-margin">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Field</th>
+                                                    <th>Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!--{$i=1}-->
+                                                <!--{foreach $val as $field => $value}-->
+                                                <tr class="<!--{if $i % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                                                    <td><!--{$i++}--></td>
+                                                    <td><!--{$field}--></td>
+                                                    <td> <div class="widget-body no-margin no-padding">
+                                                        <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$field}--><!--{$key}-->" style=" padding: 2px 44px; font-size: xx-small">查看</button>
+                                                        <div id="dropper<!--{$field}--><!--{$key}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div id="droppingTwos" style="display: block;">
+                                                                            <textarea style="width: 560px;height: 760px"><!--{$value}--></textarea></div>
+                                                                    </div>
+                                                                    <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                                                × Cancel
+                                                                                <span class="fa fa-bullhorn "></span>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></td>
+                                                </tr>
+                                                <!--{/foreach}-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--{/foreach}-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+            <!--{if isset($searchList.set)}-->
+            <div class="panel panel-facebook">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFours" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisSearchCache Set
+                    </h4>
+                </div>
+                <div id="collapseFours" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <!--{foreach $searchList.set as $key=>$val}-->
+                        <div class="col-md-4 col-md-8 col-sm-4 col-xs-12 widget-body" style="width: 100%; margin-bottom: 20px">
+                            <div class="panel panel-yellow" >
+                                <div class="panel-heading note-toolbar btn-toolbar">
+                                    <h3 class="panel-title ">key：<!--{$key}-->&nbsp;&nbsp;&nbsp;&nbsp;count：<!--{$searchList.count.set.$key}--></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!--{foreach $val as $v}-->
+                                    <textarea style="width: 100%; height: 200px"><!--{$v}--></textarea>
+                                    <!--{/foreach}-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--{/foreach}-->
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+            <!--{if isset($searchList.zset)}-->
+            <div class="panel panel-primary">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFives" data-original-title="" title="">
+                    <h4 class="panel-title">
+                        RedisSearchCache Sort Set
+                    </h4>
+                </div>
+                <div id="collapseFives" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <!--{foreach $searchList.zset as $key=>$val}-->
+                        <div class="row">
+                            <div class="col-md-4 col-md-8 col-sm-4 col-xs-12 widget-body" style="width: 100%; margin-bottom: 20px">
+                                <div class="panel panel-danger" >
+                                    <div class="panel-heading note-toolbar btn-toolbar">
+                                        <h3 class="panel-title ">key：<!--{$key}-->&nbsp;&nbsp;&nbsp;&nbsp;count：<!--{$searchList.count.zset.$key}--></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <textarea style="width: 100%; height: 300px"><!--{$val}--></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{/foreach}-->
+                    </div>
+                </div>
+            </div>
+            <!--{/if}-->
+            <a href="/manager/cache/rediscache.html"><button type="button" class="btn btn-warning" style="float: right; margin-top: 5px">返回列表</button></a>
+            <!--{/if}-->
+            <!--search result end-->
+        </div>
+    </div>
+    <!-- List bar end -->
+</div>
+
+

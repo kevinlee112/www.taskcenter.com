@@ -1,0 +1,47 @@
+<div class="widget widget-info widget-stack">
+    <!--{foreach $tableinfo as $table => $info}-->
+    <div class="widget-header">
+        <form id="db" method="post" action="index.html">
+        <h4>
+            <i class="fa fa-pencil"></i>数据库：
+                <input title="" name="dbName" value="<!--{$dbname}-->" style="display: none;">
+                <a href="javascript:db.submit();"><!--{$dbname}--></a>
+           &nbsp;&nbsp;&nbsp;&nbsp;表：<a href="select.html?db_name=<!--{$dbname}-->&&table_name=<!--{$table}-->"><!--{$table}--></a>
+        </h4>
+        </form>
+    </div>
+    <!--{/foreach}-->
+    <table class="table table-bordered no-margin">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>字段名称</th>
+            <th>类型</th>
+            <th>注释</th>
+            <th>整理</th>
+            <th>默认值</th>
+            <th>空</th>
+            <th>索引</th>
+            <th>额外</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--{foreach $tablecolumn as $key => $column}-->
+        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+            <td> <!--{$key}--></td>
+            <td> <!--{$column.COLUMN_NAME}--></td>
+            <td> <!--{$column.COLUMN_TYPE}--></td>
+            <td> <!--{$column.COLUMN_COMMENT}--></td>
+            <td> <!--{$column.COLLATION_NAME}--></td>
+            <td> <!--{$column.COLUMN_DEFAULT}--></td>
+            <td> <!--{$column.IS_NULLABLE}--></td>
+            <td> <!--{$column.COLUMN_KEY}--></td>
+            <td> <!--{$column.EXTRA}--></td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+</div>
+<div class="widget-body">
+    <textarea title="" style="width: 100%; height: 200px"><!--{$info}--></textarea>
+</div>

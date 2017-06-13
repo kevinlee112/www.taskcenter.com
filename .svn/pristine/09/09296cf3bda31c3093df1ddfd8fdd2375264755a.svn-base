@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i>Db执行权限操作</h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="get" class="form-horizontal" action=""
+                      data-bv-message="This value is not valid" data-bv-feedbackicons-valid="fa fa-check" data-bv-feedbackicons-invalid="fa fa-times"
+                      data-bv-feedbackicons-validating="fa fa-refresh">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered no-margin">
+                            <thead>
+                            <tr>
+                                <th class="col-lg-1">id</th>
+                                <th class="col-lg-1">用户名</th>
+                                <th class="col-lg-1">所属角色</th>
+                                <th class="col-lg-1">执行Sql权限</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--{foreach from=$db_user_list item=user_info}-->
+                            <!--{if $total++>0}-->
+                            <!--{if $total%2 == 0}-->
+                            <!--{$color = info}-->
+                            <!--{elseif $total%2 == 1}-->
+                            <!--{$color = warning}-->
+                            <!--{/if}-->
+                            <!--{/if}-->
+                            <tr class="<!--{$color}-->">
+                                <td><!--{$user_info.id}--></td>
+                                <td><!--{$user_info.real_name}--></td>
+                                <td><!--{$role_list[$user_info.role].name}--></td>
+                                <td>
+
+                                    <!--{if !isset($permission_list[$user_info.id]) }-->
+
+                                    <a href='javascript:void(0)'
+                                       onclick='per_ctl("<!--{$user_info.id}-->","<!--{$user_info.real_name}-->","Y")'>
+                                        <button class="btn btn-default btn-rounded no-margin" type="button"
+                                                style=" padding: 2px 24px; font-size:x-small">打开
+                                        </button>
+                                    </a>
+                                    <!--{else}-->
+                                    <a href='javascript:void(0)'
+                                       onclick='per_ctl( "<!--{$user_info.id}-->","<!--{$user_info.real_name}-->","N")'>
+                                        <button class="btn btn-success btn-rounded" type="button" style=" padding: 2px 24px; font-size:x-small">关闭
+                                        </button>
+                                    </a>
+
+                                    <!--{/if}-->
+                                </td>
+                            </tr>
+                            <!--{/foreach}-->
+
+                            </tbody>
+                        </table>
+                        <!--{$pager_html}-->
+
+                    </div>
+
+                    <script>
+                        function permission_controller(user_id, user_name, is_show) {
+
+                            msg = (is_show == 'Y') ? '打开' : '关闭';
+                            if (confirm('是否要' + msg + user_name + '数据库执行权限：' + '？')) {
+                                location.href = "/manager/dboperate/dopermission.html?user_id=" + user_id + "&is_open=" + is_show;
+                            }
+                        }
+                    </script>
+
+                    <script>
+
+                        function per_ctl(user_id, user_name, is_show) {
+                            msg = (is_show == 'Y') ? '打开' : '关闭';
+                            if (confirm('是否要' + msg + user_name + '数据库执行权限：' + '？')) {
+                                $.post("/manager/dboperate/dopermission.html", {user_id: user_id, is_open: is_show}, function (data) {
+                                    if (data.code == 0) {
+                                        window.location.href = '/Manager/Dboperate/permission.html'
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                                }, "json");
+                            }
+                        }
+
+                    </script>

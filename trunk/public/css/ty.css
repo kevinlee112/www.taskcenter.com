@@ -1,0 +1,27 @@
+@charset "utf-8";
+body{ padding-top: 0; font-family:"微软雅黑"; margin:0 auto; padding:0; height:100%; }
+.none{ display: none; }
+.ty_bacMo{ position: absolute; left: 0; top: 0; background:url(../img/ty_bac.jpg) left top #42c0fc; min-height:768px; background-size:100% 100%;  width: 100%; height: 100%; z-index:-1; }
+.ty_top{ width: 100%; height:88px; line-height: 88px; background:#fff; }
+.ty_top img{ vertical-align: middle; }
+.ty_top .top{ width: 1000px; height:88px; margin: 0 auto; }
+.ty_top i{ width: 1px; height:19px; display: inline-block; background: #e0e0e0; margin: 0 20px; vertical-align: middle; }
+.ty_top span{ display: inline-block; vertical-align: middle; color:#333; font-size:22px; }
+.ty_con{ width: 100%; height: 680px; background:url(../img/ty_background.png) center top no-repeat; }
+.ty_conIn{ width: 1000px; height: 680px; background:url(../img/ty_background.png) center top no-repeat; margin: 0 auto; position: relative; }
+.ty_conIn form{ width: 298px; height: 380px; padding:0 26px; box-sizing: content-box; position: absolute; top:138px; right: 0; background:url(../img/ty_bac2.png); text-align: center; }
+.ty_conIn h2{ font-size:22px; height:62px; line-height: 62px; padding-top: 6px; color:#5785a8; margin:0; font-weight:normal; border-bottom: 1px solid #c4e4fc; margin-bottom: 10px; }
+.ty_input{ width: 100%; height:auto; }
+.ty_input label{ height:32px; display: block; width: 100%; text-align: left; line-height: 40px; font-size: 14px;color:#84afd0; }
+.ty_inputIn{ width: 254px; border: 1px solid #c5e7fd; height: 38px; line-height: 38px; text-indent:6px; *text-indent:0; padding: 0 36px 0 6px; background:white; position: relative; }
+.ty_inputIn i{ width: 20px; height: 20px; position: absolute; right: 8px; top: 9px; }
+.ty_input input{ height: 38px; line-height: 38px; font-size:16px; width: 100%; border:0; padding:0; vertical-align: top; outline:none; }
+.ty_conIn p{ height: 48px; width: 100%; margin:0; line-height: 60px; }
+.ty_conIn p a{ color:#4b97ff; font-size:14px; text-decoration:none; }
+.ty_submit{ width: 100%; height: 50px; background:url(../img/ty_login.png) no-repeat center top; border:0; line-height: 48px; color:#fffffe; font-size:22px; font-family: "微软雅黑"; }
+.ty_fl{ float: left; }
+.ty_fr{ float: right; }
+.ty_per{ background:url(../img/ty_person.png) center center; }
+.ty_password{ background:url(../img/ty_password.png) center center; }
+input::-ms-clear { display: none; }
+input:valid{ display: inline; }

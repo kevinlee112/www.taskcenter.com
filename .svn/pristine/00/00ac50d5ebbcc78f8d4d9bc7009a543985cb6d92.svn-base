@@ -1,0 +1,137 @@
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="widget widget-info">
+			<div class="widget-header">
+				<h4><i class="fa fa-file-text-o"></i>分配 <!--{$userInfo.user_name}--> 的权限</h4>
+			</div>
+		</div>
+		<div class="widget-body">
+			<form name="frm" action="/manager/user/rights.html" method="post">
+			<!--{if $rightsTree}-->
+			<!--{foreach key=key item=com from=$rightsTree}-->
+				<div class=" <!--{if $key % 2 == 0}-->panel panel-info<!--{else}-->panel panel-linkedin<!--{/if}-->">
+					<div class="panel-heading">
+						<h3 class="panel-title" style="cursor:pointer" onclick="_role_loop(<!--{$key}-->)" id="role_b_b<!--{$key}-->">
+							<span id="role_a_b<!--{$key}-->">+</span>
+							&nbsp;<!--{$com.name}-->
+						</h3>
+					</div>
+					<div id="role_c_b<!--{$key}-->" style="margin-left:20px;display:none">
+						<!--{if isset($com.controller)}-->
+						<!--{foreach from=$com.controller item=child_a_right}-->
+						<h4 class="table_form_title" style="font-size:12px">
+							<label><input name="rights[]" type="checkbox" value="<!--{$child_a_right.id}-->" id="rights_<!--{$child_a_right.id}-->" class="vm" onclick="user_right_select_all_change(this);"></label>
+							&nbsp;<!--{$child_a_right.name}-->
+						</h4>
+						<ul class="list_checkbox clearfix">
+							<!--{if isset($child_a_right.action)}-->
+							<!--{foreach item=child_b_right from=$child_a_right.action}-->
+							<li>
+								<label>
+									<input name="rights[]" type="checkbox" value="<!--{$child_b_right.id}-->" class="vm" p="p_<!--{$child_a_right.id}-->"  id="rights_<!--{$child_b_right.id}-->">
+									&nbsp;<!--{$child_b_right.name}-->
+								</label>
+							</li>
+							<!--{/foreach}-->
+							<!--{/if}-->
+						</ul>
+						<!--{/foreach}-->
+						<!--{/if}-->
+					</div>
+				</div>
+			<!--{/foreach}-->
+			<!--{/if}-->
+				<div class="form-group">
+					<label class="todo-list-item success">
+						<input class="todo-list-cb" type="checkbox" name="is_role" value="1">
+						<span class="todo-list-mark"></span>
+						<span class="todo-list-desc">&nbsp;&nbsp;&nbsp;</span>
+						<span class="label label-success pull-right">编辑到角色</span>
+					</label>
+					<input type="hidden" name="id" value="<!--{$id}-->">
+					<div class="col-lg-8 col-lg-offset-4">
+						<button type="submit" class="btn btn-warning">提交</button>
+						<button type="reset" class="btn btn-info" style="margin-left: 50px;">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<style>
+	.list_checkbox {
+		margin-left: 50px;
+		width: 720px;
+	}
+	.clearfix {
+		display: block;
+	}
+	.vm {
+		vertical-align: middle;
+	}
+	.list_checkbox {
+		margin-left: 50px;
+		width: 720px;
+	}
+	.list_checkbox li {
+		float: left;
+		padding: 5px 0;
+		width: 120px;
+	}
+	ul {
+		list-style: outside none none;
+	}
+</style>
+<script src="/js/jquery.js"></script>
+<script type="text/javascript">
+	var _loop_id = -1;
+	function _role_loop(id)
+	{
+		var loop_c = 'role_c_b';
+		var loop_b = 'role_b_b';
+		var loop_a= 'role_a_b';
+
+		if( _loop_id == id )
+		{
+			$("#"+loop_c+id).hide();
+			$("#"+loop_a+id).html('+');
+			_loop_id = -1;
+		}else{
+			$("div[id*='"+loop_c+"']").hide();
+			$("span[id*='"+loop_a+"']").html('+');
+			$("#"+loop_c+id).show();
+			$("#"+loop_a+id).html('-');
+			_loop_id = id;
+		}
+	}
+	user_right_set_select('<!--{$userRightsStr}-->');
+	//选择或取消所有子权限
+	function user_right_select_all_change(obj)
+	{
+		var obj = $(obj);
+		var s = "input[p='p_"+obj.val()+"']";
+		if(obj.is(':checked'))
+		{
+			jQuery(s).each(function(){
+				jQuery(this).attr('checked',true);	
+			});
+		}else
+		{
+			jQuery(s).each(function(){
+				jQuery(this).attr('checked',false);	
+			});
+		}
+	}
+	//设置用户权限的选中
+
+	function user_right_set_select(rights)
+	{
+		if($.trim(rights)=='') return;
+		var arr = rights.split(',');
+		for(var i=0;i<arr.length;i++)
+		{
+			jQuery("#rights_"+arr[i]).attr('checked',true);
+		}
+	}
+</script>

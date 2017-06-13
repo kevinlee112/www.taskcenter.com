@@ -1,0 +1,349 @@
+<div class="clearfix">
+    <div class="demo-btn-group">
+        <button class="btn btn-default btn-rounded" type="button" style="width: 100%;text-align: left">
+            <!--{if $city}-->
+            <li class="fa fa-leaf" style="font-weight: 600"> 城市：</li>&nbsp;<!--{$city}-->
+            <!--{/if}-->
+            <!--{if $page_name}-->
+            &nbsp&nbsp&nbsp&nbsp<i class="fa fa-leaf" style="font-weight: 600"> 页面：</i>&nbsp;<!--{$page_name}-->
+            <!--{/if}-->
+            <!--{if $area}-->
+            &nbsp&nbsp&nbsp&nbsp<i class="fa fa-leaf" style="font-weight: 600">区域：</i>&nbsp;&nbsp;<!--{$area}-->
+            <!--{/if}-->
+            <!--{if $ae}-->
+            &nbsp&nbsp&nbsp&nbsp<i class="fa fa-leaf" style="font-weight: 600">&nbsp;&nbsp;AE：</i>&nbsp;&nbsp;<!--{$ae}-->
+            <!--{/if}-->
+
+        </button>
+    </div>
+    <hr>
+    <div class="col-md-12 col-sm-12 col-xs-12" >
+    <div class="widget widget-info">
+        <div class="widget-header">
+            <h4><i class="fa fa-file-text-o"></i> 正在显示广告 </h4>
+        </div>
+        <div class="widget-body">
+            <div class="table-responsive">
+                <table class="table table-bordered no-margin">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>级别</th>
+                        <th>唯一标识</th>
+                        <th>内容（JSON）</th>
+                        <th>参数(Param)</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>推送时间</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--{if isset($displaying)}-->
+                    <tr class="info">
+                        <td><!--{$displaying.id}--></td>
+                        <td><!--{$displaying.level}--></td>
+                        <td><!--{$displaying.pdps}--></td>
+                        <td>
+                            <div class="widget-body col-md-2 no-margin no-padding">
+                                <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$displaying.id}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                <div id="dropper<!--{$displaying.id}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body center-align-text">
+                                                <div id="dropping2" style="display: block;">
+                                                    <textarea title=""  style="width: 560px;height: 460px;margin-top: 20px"><!--{$displaying.json.content}--></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                            <div class="modal-footer">
+                                                <!--{if isset($displaying.json.link)}-->
+                                                <button type="button" class="btn btn-default pull-left">
+                                                    <span class="fa fa-paperclip "></span>
+                                                    <a href="<!--{$displaying.json.link}-->" >点击查看广告链接</a>
+                                                </button>
+                                                <!--{/if}-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                        × Cancel
+                                                        <span class="fa fa-bullhorn "></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="widget-body col-md-2 no-margin no-padding">
+                                <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$displaying.pdps}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                <div id="dropper<!--{$displaying.pdps}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body center-align-text">
+                                                <div id="dropping3" style="display: block;">
+                                                    <textarea title=""  style="width: 560px;height: 460px; margin-top: 20px"><!--{$displaying.param.content}--></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                            <div class="modal-footer">
+                                                <!--{if isset($displaying.param.link)}-->
+                                                <button type="button" class="btn btn-default pull-left">
+                                                    <span class="fa fa-paperclip "></span>
+                                                    <a href="<!--{$displaying.param.link}-->" >点击查看广告链接</a>
+                                                </button>
+                                                <!--{/if}-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                        × Cancel
+                                                        <span class="fa fa-bullhorn "></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><!--{$displaying.start_time}--></td>
+                        <td><!--{$displaying.end_time}--></td>
+                        <td><!--{$displaying.push_time}--></td>
+                        <td><!--{$displaying.addtime}--></td>
+                        <td>
+                            <a  onclick="if(confirm('确认删除ID为&nbsp;<!--{$displaying.id}-->&nbsp;的广告吗？')){location.href='addelete.html?city=<!--{$smarty.get.city}-->&&page=<!--{$smarty.get.page}-->&&area=<!--{$smarty.get.area}-->&&pos=<!--{$smarty.get.pos}-->&&ad_id=<!--{$displaying.id}-->'}"><button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>
+                        </td>
+                    </tr>
+
+                    <!--{/if}-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="widget-body">
+        <div class="btn-group">
+            <a href="adlist.html?city=<!--{$param.city}-->&&page=<!--{$param.page}-->&&area=<!--{$param.area}-->&&pos=<!--{$param.pos}-->&&status=expired"> <button class="btn btn-default btn-rounded"><i class="fa fa-arrow-left"></i> 过期广告</button></a>
+            <a href="adlist.html?city=<!--{$param.city}-->&&page=<!--{$param.page}-->&&area=<!--{$param.area}-->&&pos=<!--{$param.pos}-->&&status=use"><button class="btn btn-default btn-rounded">有效广告<i class="fa fa-arrow-right"></i></button></a>
+        </div>
+    </div>
+    <hr>
+    <!--{if isset($use)}-->
+    <div class="widget widget-info">
+        <div class="widget-header">
+            <h4><i class="fa fa-file-text-o"></i> 有效广告</h4>
+        </div>
+        <div class="widget-body">
+            <div class="table-responsive">
+                <table class="table table-bordered no-margin">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>级别</th>
+                        <th>唯一标识</th>
+                        <th>内容（JSON）</th>
+                        <th>参数（Param）</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>推送时间</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--{foreach $use as $key => $value}-->
+                    <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                        <td><!--{$value.id}--></td>
+                        <td><!--{$value.level}--></td>
+                        <td><!--{$value.pdps}--></td>
+                        <td>
+                            <div class="widget-body col-md-2 no-margin no-padding">
+                                <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$value.id}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                <div id="dropper<!--{$value.id}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body center-align-text">
+                                                <div id="dropping4" style="display: block;">
+                                                    <textarea title=""  style="width: 560px;height: 460px; margin-top: 20px"><!--{$value.json.content}--></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                            <div class="modal-footer">
+                                                <!--{if isset($value.json.link)}-->
+                                                <button type="button" class="btn btn-default pull-left">
+                                                    <span class="fa fa-paperclip "></span>
+                                                    <a href="<!--{$value.json.link}-->" >点击查看广告链接</a>
+                                                </button>
+                                                <!--{/if}-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                        × Cancel
+                                                        <span class="fa fa-bullhorn "></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="widget-body col-md-2 no-margin no-padding">
+                                <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$value.pdps}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                <div id="dropper<!--{$value.pdps}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body center-align-text">
+                                                <div id="dropping" style="display: block;">
+                                                    <textarea title=""  style="width: 560px;height: 460px"><!--{$value.param.content}--></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                            <div class="modal-footer">
+                                                <!--{if isset($value.param.link)}-->
+                                                <button type="button" class="btn btn-default pull-left">
+                                                    <span class="fa fa-paperclip "></span>
+                                                    <a href="<!--{$value.param.link}-->" >点击查看广告链接</a>
+                                                </button>
+                                                <!--{/if}-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                        × Cancel
+                                                        <span class="fa fa-bullhorn "></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><!--{$value.start_time}--></td>
+                        <td><!--{$value.end_time}--></td>
+                        <td><!--{$value.push_time}--></td>
+                        <td><!--{$value.addtime}--></td>
+                        <td>
+                            <a  onclick="if(confirm('确认删除ID为&nbsp;<!--{$displaying.id}-->&nbsp;的广告吗？')){location.href='addelete.html?city=<!--{$smarty.get.city}-->&&page=<!--{$smarty.get.page}-->&&area=<!--{$smarty.get.area}-->&&pos=<!--{$smarty.get.pos}-->&&ad_id=<!--{$displaying.id}-->'}"><button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>
+                        </td>
+                    </tr>
+                    <!--{/foreach}-->
+                    </tbody>
+                </table>
+                <!--{$page_html}-->
+            </div>
+        </div>
+    </div>
+    <!--{/if}-->
+    <!--{if isset($expired)}-->
+    <div class="widget widget-info">
+        <div class="widget-header">
+            <h4><i class="fa fa-file-text-o"></i> 过期广告</h4>
+        </div>
+        <div class="widget-body">
+            <div class="table-responsive">
+                <table class="table table-bordered no-margin">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>级别</th>
+                        <th>唯一标识</th>
+                        <th>内容（JSON）</th>
+                        <th>参数（Param）</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>推送时间</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--{foreach $expired as $key => $val}-->
+                    <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                        <td><!--{$val.id}--></td>
+                        <td><!--{$val.level}--></td>
+                        <td><!--{$val.pdps}--></td>
+                        <td>
+                            <div class="widget-body col-md-2 no-margin no-padding">
+                                <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$val.pdps}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                <div id="dropper<!--{$val.pdps}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <button type="button" class="btn btn-default pull-left">
+                                                <span class="fa fa-paperclip "></span>
+                                                Attach Digital Assets
+                                            </button>
+                                            <div class="modal-body center-align-text">
+                                                <div id="dropping5" style="display: block;">
+                                                    <textarea title=""  style="width: 560px;height: 460px; margin-top: 20px"><!--{$val.json.content}--></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                            <div class="modal-footer">
+                                                <!--{if isset($v.json.link)}-->
+                                                <button type="button" class="btn btn-default pull-left">
+                                                    <span class="fa fa-paperclip "></span>
+                                                    <a href="<!--{$val.json.link}-->" >点击查看广告链接</a>
+                                                </button>
+                                                <!--{/if}-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                        × Cancel
+                                                        <span class="fa fa-bullhorn "></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="widget-body col-md-2 no-margin no-padding">
+                                <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#dropper<!--{$val.id}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                <div id="dropper<!--{$val.id}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body center-align-text">
+                                                <div id="dropping1" style="display: block;">
+                                                    <textarea title=""  style="width: 560px;height: 460px; margin-top: 20px"><!--{$val.param.content}--></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                            <div class="modal-footer">
+                                                <!--{if isset($v.param.link)}-->
+                                                <button type="button" class="btn btn-default pull-left">
+                                                    <span class="fa fa-paperclip "></span>
+                                                    <a href="<!--{$val.param.link}-->" >点击查看广告链接</a>
+                                                </button>
+                                                <!--{/if}-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                        × Cancel
+                                                        <span class="fa fa-bullhorn "></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><!--{$val.start_time}--></td>
+                        <td><!--{$val.end_time}--></td>
+                        <td><!--{$val.push_time}--></td>
+                        <td><!--{$val.addtime}--></td>
+                        <td>
+                            <a  onclick="if(confirm('确认删除ID为&nbsp;<!--{$displaying.id}-->&nbsp;的广告吗？')){location.href='addelete.html?city=<!--{$smarty.get.city}-->&&page=<!--{$smarty.get.page}-->&&area=<!--{$smarty.get.area}-->&&pos=<!--{$smarty.get.pos}-->&&ad_id=<!--{$displaying.id}-->'}"><button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>
+                        </td>
+                    </tr>
+                    <!--{/foreach}-->
+                    </tbody>
+                </table>
+                <!--{$page_html}-->
+            </div>
+        </div>
+    </div>
+    <!--{/if}-->
+</div>
+</div>

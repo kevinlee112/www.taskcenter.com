@@ -1,0 +1,74 @@
+[common]
+application.directory = APP_PATH
+application.library = APP_PATH "library"
+application.bootstrap = APP_PATH "library" DIRECTORY_SEPARATOR "Bootstrap.php"
+application.dispatcher.catchException = true
+application.dispatcher.throwException = true
+application.autoRender = false
+;application.modules = Index
+
+;smarty
+application.view.ext = html
+smarty.left_delimiter = "<!--{"
+smarty.right_delimiter = "}-->"
+smarty.template_dir = APP_PATH "views/"
+smarty.compile_dir = TPL_CACHE_DIR
+smarty.debug_tpl = PATH_FW_LIBRARY "Smarty/debug.tpl"
+
+
+; 声明项目本地类库
+application.localLibrary = Base
+
+
+
+[develop:common]
+adpage.bootstrap.page = 'PG_53996BF7BB74B8'
+adpage.bootstrap.name = '开机启动图'
+
+adpage.index.page = 'PG_578C4286D09B81'
+adpage.index.name = '首页'
+adpage.index.news_flow.area = '2'
+adpage.index.news_flow.name = '信息流'
+adpage.index.news_flow.pos = '3,9'
+
+adpage.index.focus_map.area = 1
+adpage.index.focus_map.name = '轮播焦点图'
+
+adpage.house_list.page = 'PG_52454EB7AA06C0'
+adpage.house_list.name = '楼盘列表'
+
+
+
+[beta:common]
+adpage.bootstrap.page = 'PG_53996BF7BB74B8'
+adpage.bootstrap.name = '开机启动图'
+
+adpage.index.page = 'PG_578C4286D09B81'
+adpage.index.name = '首页'
+adpage.index.news_flow.area = '2'
+adpage.index.news_flow.name = '信息流'
+adpage.index.news_flow.pos = '3,9'
+
+adpage.index.focus_map.area = 1
+adpage.index.focus_map.name = '轮播焦点图'
+
+adpage.house_list.page = 'PG_52454EB7AA06C0'
+adpage.house_list.name = '楼盘列表'
+
+
+[product:common]
+adpage.bootstrap.page = 'PG_53996BF7BB74B8'
+adpage.bootstrap.name = '开机启动图'
+
+adpage.index.page = 'PG_51B29D1EF10598'
+adpage.index.name = '首页'
+adpage.index.news_flow.area = '2'
+adpage.index.news_flow.name = '信息流'
+adpage.index.news_flow.pos = '3,9'
+
+adpage.index.focus_map.area = 1
+adpage.index.focus_map.name = '轮播焦点图'
+
+adpage.house_list.page = 'PG_52454EB7AA06C0'
+adpage.house_list.name = '楼盘列表'
+

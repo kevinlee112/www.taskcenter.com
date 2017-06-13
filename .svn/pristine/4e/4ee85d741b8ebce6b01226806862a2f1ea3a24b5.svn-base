@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> 首页活动入口开关</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>值</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><button class="btn btn-primary btn-rounded " type="button" name="switch"><!--{$switch}--></button></td>
+                            <td><a href='switchs.html?switch=1'><button class="btn btn-primary btn-rounded <!--{if $switch==0}--> btn-borderd <!--{/if}-->" type="button" name="switch">显 示</button></a>
+                                |  <a href='switchs.html?switch=0'><button class="btn btn-primary btn-rounded <!--{if $switch==1}--> btn-borderd <!--{/if}-->" type="button" name="switch">不显示</button></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i>添加任务</h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="post" class="form-horizontal" action="/app/task/add.html?act=form" data-bv-message="此值无效"
+                      data-bv-feedbackicons-valid="fa fa-check" data-bv-feedbackicons-invalid="fa fa-times"
+                      data-bv-feedbackicons-validating="fa fa-refresh">
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label" style="width: 300px">任务类型</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" id="task_type" name="task_type" data-bv-field="compose_id" required data-bv-trigger="blur"
+                                    data-bv-notempty-message="请选择对应类型">
+                                <option value="">请选择</option>
+                                <!--{if $type_list}-->
+                                <!--{foreach from=$type_list key=type_id item=type_name}-->
+                                <option value="<!--{$type_id}-->"><!--{$type_name}--></option>
+                                <!--{/foreach}-->
+                                <!--{/if}-->
+                            </select>
+                            <i class="form-control-feedback" data-bv-icon-for="task_type" style="display: none;"></i>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-lg-6 control-label" style="width: 300px">任务名称</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="task_name" required="required" data-bv-notempty-message="请填写任务名称"
+                            />
+                            <i class="form-control-feedback" data-bv-icon-for="task_name"></i>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-lg-6 control-label" style="width: 300px">任务说明</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="task_desc" required="required" data-bv-notempty-message="请填写任务说明"
+                            >
+                            <i class="form-control-feedback" data-bv-icon-for="task_desc"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label" style="width: 300px">任务周期</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" id="task_period" name="task_period" data-bv-field="task_period" required
+                                    data-bv-trigger="blur"
+                                    data-bv-notempty-message="请选择对应周期">
+                                <option value="">请选择</option>
+                                <!--{if type_period_list}-->
+                                <!--{foreach from=$type_period_list key=period_id item=period_name}-->
+                                <option value="<!--{$period_id}-->"><!--{$period_name}--></option>
+                                <!--{/foreach}-->
+                                <!--{/if}-->
+                            </select>
+                            <i class="form-control-feedback" data-bv-icon-for="task_type" style="display: none;"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label" style="width: 300px" >任务图片</label>
+                        <div class="col-lg-7">
+                            <button id='album' class="btn btn-gplus btn-borderd" data-target="#show_pictures" onclick="show_album(1,this.id,1)" data-toggle="modal" type="button" id="btn_upload1">图片上传</button>
+                            <input type="hidden" class='form-control' required="required"  data-bv-notempty-message="请上传图片" name="task_image" class="upload_file">
+                            <div class="yulan"></div>
+                        </div>
+                    </div>
+                    <!--<div class="form-group ">-->
+                        <!--<label class="col-lg-6 control-label" style="width: 300px">任务图片</label>-->
+                        <!--<div class="col-lg-6 btn_img">-->
+                            <!--<input type="file" class="form-control" name="task_image" required="required" id="upload" data-bv-notempty-message="请上传图片"-->
+                                   <!--pattern=".*(.jpg|.png|.gif)$" data-bv-regexp-message="图片支持jpg png gif格式">-->
+                            <!--<i class="form-control-feedback" data-bv-icon-for="task_image"></i>-->
+                            <!--<span></span>-->
+
+                        <!--</div>-->
+                        <!--<div class="files"></div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group img_preview" style="display: none">-->
+                        <!--<label class="col-lg-6 control-label" style="width: 300px">图片预览(单击删除)</label>-->
+                        <!--<div class="col-lg-6">-->
+                            <!--<div id="show_img"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group ">
+                        <label class="col-lg-6 control-label" style="width: 300px">奖励次数</label>
+                        <div class="col-lg-6">
+                            <input type="number" class="form-control" name="award_time" required="required" data-bv-notempty-message="请填写奖励次数"
+                                   pattern="^[1-9]+[0-9]*$"
+                                   data-bv-regexp-message="请填写正数数字"
+                            />
+                            <i class="form-control-feedback" data-bv-icon-for="award_time"></i>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-lg-6 control-label" style="width: 300px">任务版本</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="task_version" required="required" data-bv-notempty-message="请填写版本号"
+                                   pattern="^[1-9]+[0-9]*$"
+                                   data-bv-regexp-message="请填写数字"
+                            />
+                            <i class="form-control-feedback" data-bv-icon-for="appVersion"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group" align="center">
+                        <button type="submit" class="btn btn btn-success">添加</button>
+                        <button type="reset" class="btn btn btn-default" style="margin-left: 50px;">重置</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script src="//cdn.bootcss.com/jquery/1.12.0/jquery.js"></script>-->
+<script src="/js/jscolor.js"></script>
+<script src="/js/jquery.js"></script>
+<link rel="stylesheet" href="/css/album.css">
+<script src="/js/album.js"></script>
+<script type="text/javascript">
+    //根据任务类型加载不同选项
+    $(function () {
+        $("#task_type").on("change", function () {
+            if ($(this).val()) {
+                switch (parseInt($(this).val())) {
+                    case 2://广告分享
+                        var html = '<div class="form-group has-feedback extra"><label class="col-lg-6 control-label"style="width: 300px">广告链接</label><div class="col-lg-6"><input type="text"class="form-control"name="ad_link"required="required"data-bv-notempty-message="请填写广告链接"data-bv-field="ad_link"><i class="form-control-feedback"data-bv-icon-for="ad_link"></i></div></div>';
+                        $(".extra").remove();
+                        $(this).parent().parent().after(html);
+                        break;
+                    case 3://时长统计
+                        var html = '<div class="form-group has-feedback extra"><label class="col-lg-6 control-label"style="width: 300px">使用时长</label><div class="col-lg-6"><input type="text"class="form-control"name="time_line"required="required"data-bv-notempty-message="请填写使用时长"data-bv-field="adlink"><i class="form-control-feedback"data-bv-icon-for="time_line"style="display: none;"></i><small class="help-block"data-bv-validator="notEmpty"data-bv-for="adlink"data-bv-result="NOT_VALIDATED"style="display: none;">请填写使用时长</small></div></div>';
+                        $(".extra").remove();
+                        $(this).parent().parent().after(html);
+                        break;
+                    case 7://app分享 share_title share_content
+                        var html = '<div class="form-group has-feedback extra"><label class="col-lg-6 control-label"style="width: 300px">分享标题</label><div class="col-lg-6"><input type="text"class="form-control"name="share_title"required="required"data-bv-notempty-message="请填写分享标题"data-bv-field="adlink"><i class="form-control-feedback"data-bv-icon-for="adlink"style="display: none;"></i><small class="help-block"data-bv-validator="notEmpty"data-bv-for="adlink"data-bv-result="NOT_VALIDATED"style="display: none;">请填写分享标题</small></div></div>';
+
+                        html += '<div class="form-group has-feedback extra"><label class="col-lg-6 control-label"style="width: 300px">分享描述</label><div class="col-lg-6"><input type="text"class="form-control"name="share_content"required="required"data-bv-notempty-message="请填写分享描述"data-bv-field="adlink"><i class="form-control-feedback"data-bv-icon-for="adlink"style="display: none;"></i><small class="help-block"data-bv-validator="notEmpty"data-bv-for="adlink"data-bv-result="NOT_VALIDATED"style="display: none;">请填写分享描述</small></div></div>'
+
+                        html += '<div class="form-group has-feedback extra"><label class="col-lg-6 control-label"style="width: 300px">分享链接</label><div class="col-lg-6"><input type="url"class="form-control"name="share_link"required="required"data-bv-notempty-message="请填写分享链接"data-bv-field="share_link"><i class="form-control-feedback"data-bv-icon-for="share_link"style="display: none;"></i><small class="help-block"data-bv-validator="notEmpty"data-bv-for="share_link"data-bv-result="NOT_VALIDATED"style="display: none;">请填写分享链接</small></div></div>'
+                        $(".extra").remove();
+                        $(this).parent().parent().after(html);
+                        break;
+                    default:
+                        $(".extra").remove();
+                        break;
+                }
+            }
+            else {
+                $(".extra").remove();
+            }
+        }).trigger("change");
+    });
+</script>

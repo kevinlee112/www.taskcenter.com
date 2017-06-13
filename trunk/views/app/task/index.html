@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i>任务列表</h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="get" class="form-horizontal" action="/App/Task/index?task_type=<!--{$task_type}-->"
+                      data-bv-message="This value is not valid" data-bv-feedbackicons-valid="fa fa-check" data-bv-feedbackicons-invalid="fa fa-times"
+                      data-bv-feedbackicons-validating="fa fa-refresh">
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label">任务类型:</label>
+                        <div class="col-lg-2">
+                            <select class="form-control" name="task_type">
+                                <option value="">请选择</option>
+                                <!--{if $type_list}-->
+                                <!--{foreach from=$type_list key=type_id item=type_name}-->
+                                <option value="<!--{$type_id}-->" <!--{if $type_id == $smarty.get.task_type|default:0}-->selected="selected"
+                                <!--{/if}-->><!--{$type_name}--></option>
+                                <!--{/foreach}-->
+                                <!--{/if}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-1 col-lg-offset-1">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th class="col-lg-1">id</th>
+                            <th class="col-lg-2">名称</th>
+                            <th class="col-lg-2">任务说明</th>
+                            <th class="col-lg-2">类型</th>
+                            <th class="col-lg-1">奖励次数</th>
+                            <th class="col-lg-1">任务版本</th>
+                            <th class="col-lg-1">任务周期</th>
+                            <th class="col-lg-2" align="center">操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$task_list item=task_list_info}-->
+                        <!--{if $total++>0}-->
+                        <!--{if $total%2 == 0}-->
+                        <!--{$color = info}-->
+                        <!--{elseif $total%2 == 1}-->
+                        <!--{$color = warning}-->
+                        <!--{/if}-->
+                        <!--{/if}-->
+                        <tr class="<!--{$color}-->">
+                            <td><!--{$task_list_info.id}--></td>
+                            <td><!--{$task_list_info.name}--></td>
+                            <!--<td>&lt;!&ndash;{$task_list_info.desc}&ndash;&gt;</td>-->
+                            <td><!--{$task_list_info.desc}--></td>
+                            <td><!--{$type_list[$task_list_info.type]|default:'--'}--></td>
+
+                            <!--<td><img src="&lt;!&ndash;{str_replace('task/', 'task/s_', $task_list_info.image)}&ndash;&gt;" alt=""></td>-->
+                            <td><!--{$task_list_info.price_times}--></td>
+                            <td><!--{$task_list_info.version}--></td>
+                            <td><!--{$type_period_list[$task_list_info.period]|default:'--'}--></td>
+
+                            <td>
+                                <a href='/App/Task/update?id=<!--{$task_list_info.id}-->'>
+                                    <button class="btn btn-notice btn-rounded no-margin" type="button"
+                                            style=" padding: 2px 24px; font-size:x-small">修改
+                                    </button>
+                                </a>&nbsp;
+                                <!--{if $task_list_info.status=="0"}-->
+                                <a href='#'
+                                   onclick='active_close_task("<!--{$task_list_info.id}-->","<!--{$task_list_info.name}-->","Y")'>
+                                    <button class="btn btn-success btn-rounded no-margin" type="button"
+                                            style=" padding: 2px 24px; font-size:x-small">启用
+                                    </button>
+                                </a>
+                                <!--{elseif $task_list_info.status=="1"}-->
+                                <a href='#'
+                                   onclick='active_close_task( "<!--{$task_list_info.id}-->","<!--{$task_list_info.name}-->","N")'>
+                                    <button class="btn btn-warning btn-rounded" type="button" style=" padding: 2px 24px; font-size:x-small">禁用
+                                    </button>
+                                </a>
+                                <!--{/if}-->
+
+                                <!--<a href='javascript:void(0)' onclick='del_task("&lt;!&ndash;{$task_list_info.id}&ndash;&gt;")'>-->
+                                <!--<button class="btn btn-danger btn-rounded no-margin" type="button"-->
+                                <!--style=" padding: 2px 24px; font-size:x-small">禁用-->
+                                <!--</button>-->
+                                <!--</a>-->
+
+                            </td>
+                        </tr>
+                        <!--{/foreach}-->
+
+                        </tbody>
+                    </table>
+                    <!--{$pager_html}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function active_close_task(task_id, task_name, is_show) {
+        msg = (is_show == 'Y') ? '启用' : '禁用';
+        if (confirm('是否要' + msg + '任务：' + task_name + '？')) {
+            location.href = "/App/Task/status.html?task_id=" + task_id + "&is_show=" + is_show
+        }
+    }
+</script>

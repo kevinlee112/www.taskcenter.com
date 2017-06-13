@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i>资源列表</h4>
+            </div>
+            <div class="widget-body">
+                <form id="htmlForm" method="get" class="form-horizontal" action="/manager/controller/index?compose_id=<!--{$compose_id|default:0}-->"
+                      data-bv-message="This value is not valid" data-bv-feedbackicons-valid="fa fa-check" data-bv-feedbackicons-invalid="fa fa-times"
+                      data-bv-feedbackicons-validating="fa fa-refresh">
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label">组件名称:</label>
+                        <div class="col-lg-2">
+                            <select class="form-control" name="compose_id">
+                                <option value="">请选择</option>
+                                <!--{if $compose_list}-->
+                                <!--{foreach from=$compose_list key=compose_id item=compose_name}-->
+                                <option value="<!--{$compose_id}-->" <!--{if $compose_id == $smarty.get.compose_id|default:0}-->selected="selected"
+                                <!--{/if}-->><!--{$compose_name}--></option>
+                                <!--{/foreach}-->
+                                <!--{/if}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-1 col-lg-offset-1">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th class="col-lg-1">id</th>
+                            <th class="col-lg-1">中文名称</th>
+                            <th class="col-lg-1">英文名称</th>
+                            <th class="col-lg-1">所属组件</th>
+                            <th class="col-lg-1">排序</th>
+                            <th class="col-lg-1">是否显示</th>
+                            <th class="col-lg-4">操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$controller_list item=controller_list_info}-->
+                        <!--{if $total++>0}-->
+                        <!--{if $total%2 == 0}-->
+                        <!--{$color = info}-->
+                        <!--{elseif $total%2 == 1}-->
+                        <!--{$color = warning}-->
+                        <!--{/if}-->
+                        <!--{/if}-->
+                        <tr class="<!--{$color}-->">
+                            <td><!--{$controller_list_info.id}--></td>
+                            <td><!--{$controller_list_info.func_name_cn}--></td>
+                            <td><!--{$controller_list_info.func_name}--></td>
+                            <td><!--{$compose_list[$controller_list_info.compose_id]|default:'--'}--></td>
+                            <td><!--{$controller_list_info.order_id}--></td>
+                            <td><!--{if $controller_list_info.is_show=="Y"}-->是<!--{else}-->否<!--{/if}--></td>
+                            <td>
+
+                                <a href='/manager/controller/method_list.html?controller_id=<!--{$controller_list_info.id}-->'>
+                                    <button class="btn btn-info btn-rounded no-margin" type="button"
+                                            style=" padding: 2px 24px; font-size:x-small">方法管理
+                                    </button>
+                                </a>&nbsp;
+                                <a href='/manager/controller/update?id=<!--{$controller_list_info.id}-->'>
+                                    <button class="btn btn-notice btn-rounded no-margin" type="button"
+                                            style=" padding: 2px 24px; font-size:x-small">修改
+                                    </button>
+                                </a>&nbsp;
+                                <a href='javascript:void(0)' onclick='del_controller("<!--{$controller_list_info.id}-->")'>
+                                    <button class="btn btn-danger btn-rounded no-margin" type="button"
+                                            style=" padding: 2px 24px; font-size:x-small">删除
+                                    </button>
+                                </a>
+                                <!--{if $controller_list_info.func_name <> 'controller_rights'}-->
+                                <!--{if $controller_list_info.is_show=="N"}-->
+                                <a href='#'
+                                   onclick='hidden_controller("<!--{$controller_list_info.id}-->","<!--{$controller_list_info.func_name_cn}-->","Y","<!--{$controller_list_info.compose_id}-->")'>
+                                    <button class="btn btn-default btn-rounded no-margin" type="button"
+                                            style=" padding: 2px 24px; font-size:x-small">显示
+                                    </button>
+                                </a>
+                                <!--{elseif $controller_list_info.is_show=="Y"}-->
+                                <a href='#'
+                                   onclick='hidden_controller( "<!--{$controller_list_info.id}-->","<!--{$controller_list_info.func_name_cn}-->","N","<!--{$controller_list_info.compose_id}-->")'>
+                                    <button class="btn btn-success btn-rounded" type="button" style=" padding: 2px 24px; font-size:x-small">隐藏
+                                    </button>
+                                </a>
+                                <!--{/if}-->
+                                <!--{/if}-->
+                            </td>
+                        </tr>
+                        <!--{/foreach}-->
+
+                        </tbody>
+                    </table>
+                    <!--{$pager_html}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function del_controller(controller_id) {
+        if (confirm('是否要删除此controller？')) {
+            location.href = "/manager/controller/delete.html?controller_id=" + controller_id;
+        }
+    }
+    function hidden_controller(controller_id, controller_name, is_show, compose_id) {
+        var msg = '';
+        msg = (is_show == 'Y') ? '显示' : '隐藏';
+        if (confirm('是否要' + msg + '控制器：' + controller_name + '？')) {
+            location.href = "/manager/controller/hidden.html?controller_id=" + controller_id + "&is_show=" + is_show + "&compose_id=" + compose_id;
+        }
+    }
+</script>

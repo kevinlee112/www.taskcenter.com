@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> 组件列表</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin center-align-text">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>任务名称</th>
+                            <th>任务类型</th>
+                            <th>上次执行时间</th>
+                            <th>下次执行时间</th>
+                            <th>执行周期</th>
+                            <th>模块</th>
+                            <th>执行脚本</th>
+                            <th>执行状态</th>
+                            <th>进程号</th>
+                            <th>进程管理</th>
+                            <th>任务描述</th>
+                            <th>最后操作人</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$list key=key item=row}-->
+                        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                            <td><!--{$row.id}--></td>
+                            <td><!--{$row.name}--></td>
+                            <td><!--{if $row.type == 1}-->定时任务<!--{elseif $row.type == 2}-->周期任务<!--{/if}--></td>
+                            <td><!--{$row.pre_time}--></td>
+                            <td><!--{$row.nxt_time}--></td>
+                            <td><!--{$row.period_interval}-->&nbsp<!--{$row.period_type}--></td>
+                            <td><!--{$row.exec_mod}--></td>
+                            <td><!--{$row.exec_act}--></td>
+                            <td><!--{$row.status}--></td>
+                            <td><!--{$row.pid}--></td>
+                            <td>
+                                <a href="execute.html?action=start&id=<!--{$row.id}-->"><button type="submit" class="btn btn-notice btn-rounded no-margin" style="padding: 2px 20px; font-size:x-small">START</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a  onclick='if(confirm("确认停止任务&nbsp;<!--{$row.name}-->&nbsp;吗？")){location.href="execute.html?action=start&id=<!--{$row.id}-->"}'><button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">STOP</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href= "execute.html?action=start&id=<!--{$row.id}-->"><button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">RESTART</button> </a>
+                            </td>
+                            <td>
+                                <div class="widget-body col-md-2 no-margin no-padding">
+                                    <button class="btn btn-info btn-rounded btn-borderd no-margin" data-toggle="modal" data-target="#description<!--{$row.id}-->" style=" padding: 2px 24px; font-size: xx-small">查看</button>
+                                    <div id="description<!--{$row.id}-->" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body center-align-text">
+                                                    <div id="dropping2" style="display: block;">
+                                                        <textarea title=""  style="width: 560px;height: 460px;margin-top: 20px"><!--{$row.description}--></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="note-resizebar"><div class="note-icon-bar"></div><div class="note-icon-bar"></div><div class="note-icon-bar"></div></div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default pull-left">
+                                                        <span class="fa fa-paperclip "></span>
+                                                        <a href="" ></a>
+                                                    </button>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default opacity75" data-dismiss="modal">
+                                                            × Cancel
+                                                            <span class="fa fa-bullhorn "></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><!--{$row.last_mender}-->&nbsp;|&nbsp;<!--{$row.last_modify_time}--></td>
+                            <td>
+                                <a href='Update.html?id=<!--{$row.id}-->'><button type="submit" class="btn btn-notice btn-rounded no-margin" style="padding: 2px 20px; font-size:x-small">修改</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a  onclick="if(confirm('确认删除任务&nbsp;<!--{$row.name}-->&nbsp;吗？')){location.href='Delete.html?id=<!--{$row.id}-->'}"><button type="submit" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <!--{if $row.is_valid=="0"}-->
+                                <a href='Disable.html?id=<!--{$row.id}-->&is_valid=<!--{$row.is_valid}-->'><button type="submit" class="btn btn-warning btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">启用</button> </a>
+                                <!--{elseif $row.is_valid=="1"}-->
+                                <a href='Disable.html?id=<!--{$row.id}-->&is_valid=<!--{$row.is_valid}-->'><button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">禁用</button> </a>
+                                <!--{/if}-->
+                            </td>
+                        </tr>
+                        <!--{/foreach}-->
+                        </tbody>
+                    </table>
+                    <div class="widget-body" style="height: 80px;">
+                        <!--{$page_html}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

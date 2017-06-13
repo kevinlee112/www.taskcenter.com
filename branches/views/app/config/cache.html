@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="widget widget-info">
+            <div class="widget-header">
+                <h4><i class="fa fa-file-text-o"></i> APP缓存版本</h4>
+            </div>
+            <div class="widget-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-margin">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>模块</th>
+                            <th>缓存版本</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--{foreach from=$cache_list key=key item=cache}-->
+                        <tr class="<!--{if $key % 2 == 0}-->info<!--{else}-->warning<!--{/if}-->">
+                            <!--{if isset($smarty.get.update) && $smarty.get.update == $cache.id}-->
+                            <form method="post" action="cache.html?update=<!--{$cache.id}-->">
+                                <input type="text" class="form-control" name="status"  data-bv-trigger="blur" required value="1" style="display: none">
+                                <td class="col-lg-1"><input type="text" class="form-control" name="id"  data-bv-trigger="blur" readonly value="<!--{$key+1}-->"></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="module"  data-bv-trigger="blur" required value="<!--{$cache.module}-->"></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="cache_version"  data-bv-trigger="blur" required value="<!--{$cache.cache_version}-->"></td>
+                                <td class="col-lg-2">
+                                    <button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">修改</button>
+                                </td>
+                            </form>
+                            <!--{else}-->
+                            <td><!--{$key+1}--></td>
+                            <td><!--{$cache.module}--></td>
+                            <td><!--{$cache.cache_version}--></td>
+                            <td>
+                                <a href='cache.html?update=<!--{$cache.id}-->'><button type="submit" class="btn btn-notice btn-rounded no-margin" style="padding: 2px 20px; font-size:x-small">修改</button> </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a  onclick="if(confirm('确认删除缓存key&nbsp;<!--{$cache.cache_version}-->&nbsp;吗？')){location.href='?delete=<!--{$cache.id}-->'}"><button type="button" class="btn btn-danger btn-rounded no-margin" style=" padding: 2px 14px; font-size:x-small">删除</button> </a>
+                            </td>
+                            <!--{/if}-->
+                        </tr>
+                        <!--{/foreach}-->
+                        <tr>
+                            <form method="post" action="cache.html">
+                                <td class="col-lg-1"></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="module"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-1"><input type="text" class="form-control" name="cache_version"  data-bv-trigger="blur" required></td>
+                                <td class="col-lg-2">
+                                    <button type="submit" class="btn btn-success btn-rounded no-margin" style="padding: 2px 14px; font-size:x-small">添加</button>
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="widget-body" style="height: 80px;">
+                        <!--{$page_html}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
